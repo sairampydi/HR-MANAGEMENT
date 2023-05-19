@@ -1,0 +1,37 @@
+{% extends "hr_nav.html" %}
+{% load static tailwind_tags %}
+
+    <title>{% block title %}Document{% endblock %}</title>
+    
+{% block body %}
+    {% tailwind_css %}
+  <div class="relative  ml-5">
+    <h1 class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 bg-white w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Leave report</h1>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th class="px-6 py-3">name</th>
+                <th class="px-6 py-3">employee id</th>
+                <th class="px-6 py-3">start date</th>
+                <th class="px-6 py-3">end date</th>
+                <th class="px-6 py-3">reason</th>
+                <th class="px-6 py-3"></th>
+                <th class="px-6 py-3"></th>
+            </tr>
+        </thead>
+        {% for i in leaves %}
+        <tbody class="">
+        <tr>
+            <td class="px-6 py-3" >{{ i.name }}</td>
+            <td class="px-6 py-3" >{{ i.id }}</td> 
+            <td class="px-6 py-3" >{{ i.startdate }}</td>
+            <td class="px-6 py-3" >{{ i.lastdate }}</td>
+            <td class="px-6 py-3" >{{ i.enterreason }}</td>
+            <td><button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-8 py-3 rounded">Accept</button></td>
+            <td><button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-8 py-3 rounded">Reject</button></td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% load static tailwind_tags  %}
+{% block body %}
+<script src="https://cdn.tailwindcss.com"></script>
+{% tailwind_css %}
+<link rel="stylesheet" href="">
+<div class="min-h-screen p-6 bg-gray-100  items-center justify-center">
+    <div class="container max-w-screen-lg mx-auto">
+      <div>
+        <h2 class="font-semibold text-center text-3xl text-yellow-700">Profile</h2>
+        <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+              <div class="text-gray-600">
+                <p class="font-medium text-lg">Personal Details</p>
+              </div>
+<form action="{% url 'a3:profile' %}" method="post" class="">
+    {% csrf_token %}
+    <div class="lg:col-span-2">
+    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+      <div class="md:col-span-5">
+        <label for="full_name">User Name</label>
+        <input type="text" name="username" id="" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="username"><br>
+      </div>
+        <div class="md:col-span-5">
+        <label for="full_name">Email</label>
+        <input type="email" name="email" id="" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="email"><br>
+        </div>
+        <div class="md:col-span-5">
+        <label for="full_name">First Name</label>
+        <input type="text" name="firstname" id="" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="firstname"><br>
+        </div>
+        <div class="md:col-span-5">
+            <label for="full_name">Last Name</label>
+            <input type="text" name="lastname" id="" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="lastname"><br>
+        </div>
+        <div class="md:col-span-5">
+            <label for="full_name">Empoloyee Id</label>
+            <input type="text" name="emp_id" id="" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value = "{{bar}}"><br>
+        </div>
+        <div class="md:col-span-5">
+            <label for="full_name">Date of Birth</label>
+            <input type="date" name="dob" id="" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="date of birth"><br>
+        </div>
+    </div>
+    </div>
+<div class="">
+      <div class="md:col-span-5">
+        <label for="full_name">Mobile Number</label>
+            <input type="text" name="mobile" id="" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="mobile"><br>
+      </div>
+</div>
+      <div class="md:col-span-5">
+        <label for="full_name">Address</label>
+        <input type="text" name="address" id="" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="address"><br>
+      </div>
+      <div class="md:col-span-5">
+        <label for="full_name">City</label>
+        <input type="text" name="city" id="" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="city"><br>
+      </div>
+      <div class="md:col-span-5">
+        <label for="full_name">Country</label>
+        <input type="text" name="country" id="" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="country"><br>
+      </div>
+      <div class="md:col-span-5">
+        <label for="full_name">Postal Code</label>
+        <input type="text" name="postal_code" id="" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="postal_code"><br>
+        </div>
+     
+        <!-- <button class="bg-blue-500 text-white hover:bg-blue-700 font-bold rounded-md px-2 py-1 " type="submit">Submit</button> -->
+<input type="submit" name="submit" class="bg-black text-white mt-3 ml-40 text-lg  hover:bg-blue-700 font-bold rounded-md px-2 py-1" value="Submit" id="">
+<!-- <input type="text" name="name" id="">
+<input type="text" name="name" id=""> -->
+
+</form>
+            </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

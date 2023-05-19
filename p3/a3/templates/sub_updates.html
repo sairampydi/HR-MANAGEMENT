@@ -1,0 +1,35 @@
+{% extends "emp_nav.html" %}
+{% load static tailwind_tags %}
+{%  block title%} <title> Subject Updates </title>{% endblock %}
+<!-- {% block css%}
+ <style>
+body{
+    background-color: aquamarine;
+    background-repeat: repeat;
+}
+</style>
+{% endblock %} -->
+{% block body %}
+{% tailwind_css %}
+<body class="">
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> 
+<div class=" ">
+    <center><div class="border text-4xl text-yellow-800 px-6 pt-10 pb-8  w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">This is Subject Updates</div></center>
+    <div class="border relative px-4 pt-7 pb-8 bg-white shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded-b-md flex">
+        <div id="main" class="grid grid-rows-4 grid-flow-col gap-8 justify-center">
+            <div class=" w-26  h-12">BRANCH</div> 
+            <div class=" w-26 h-12">YEAR</div>
+            <div class=" w-26 h-12">SECTION</div>
+            <div class=" w-26 h-12">SUBJECT</div>
+            <div class=" w-26  h-12">:</div> 
+            <div class=" w-26 h-12">:</div>
+            <div class=" w-26 h-12">:</div>
+            <div class=" w-26 h-12">:</div>
+            {%  for i in subject %}
+            <div class=" w-26 h-12"> {{ i.branch }} </div>
+            <div class=" w-26 h-12"> {{ i.year }} </div>
+            <div class=" w-26 h-12"> {{ i.section }} </div>
+            <div class=" w-26 h-12"> {{ i.subject }} </div>
+            {% endfor %}
+</div>       
+{% endblock %} 

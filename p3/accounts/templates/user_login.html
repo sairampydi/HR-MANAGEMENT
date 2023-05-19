@@ -1,0 +1,78 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body class=" bg-slate-200">
+   <div class=" bg-black text-white p-3 rounded-full sticky">
+    <div class="text-2xl">
+    Gayatri Vidya Parishad
+    <div class="text-lg" style ="float:right;">
+    <a href="home.html"class="mr-10 hover:bg-slate-800 p-3">Home</a>  
+    <a href="login.html"class="mr-10 hover:bg-slate-800 p-3">Faculty</a>
+    <a href="admin_login.html"class="mr-10 hover:bg-slate-800 p-3">Admin</a>        
+    </div> 
+    </div>
+    </div> -->
+<!-- <div class=" min-h-screen bg-slate-200 py-6 flex flex-col justify-center relative overflow-hidden sm:py-12">
+   <span class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 bg-white w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Faculty Sign in</span>
+<div class="border relative px-4 pt-7 pb-8 bg-white shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded-b-md"> -->
+    <!-- <form action="">
+        <label for="" class="block">Username or Email</label>
+        <input type="Email" class="border w-full h-10 px-3 mb-5 rounded-md" placeholder="Username or Email">
+        <label for="" class="block">Password</label>
+        <input type="password" class="border w-full h-10 px-3 mb-5 rounded-md" placeholder="password">
+      <div class="flex items-start">
+          <a href="#" class="text-sm text-blue-700 hover:underline ml-auto dark:text-blue-500">Forget 
+            Password?</a>
+        </div>
+      <button type="submit" class="ml-32 my-5 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold py-3 px-10 rounded">Login</button>
+      
+    </form> -->
+    <!-- {% csrf_token %}
+    {{ form }} -->
+    
+     <!-- <a href="register.html"><button id="submit"
+        class="ml-24 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-16 py-3 rounded">
+        Register
+      </button></a> -->
+    <!-- </div>
+  </div>
+</body>
+</html>  -->
+
+<html lang="en">
+<head>
+   <title>Document</title>
+</head>
+<style>
+h1{
+  margin-left: 30%;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+input[type="submit"]{
+  display: block;
+  background: #98E;
+  margin-top: 10px;
+  margin-left: 30%;
+}
+</style>
+<body>
+    <h1>login</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <!-- <input type="text" name="name" id="name" placeholder="name">
+        <input type="password" name="password" id="" placeholder="password"> -->
+        <input type="submit" name="" value="login" id="">
+    </form>
+</body>
+</html>

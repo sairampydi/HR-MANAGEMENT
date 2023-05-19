@@ -1,0 +1,24 @@
+    {% load static tailwind_tags %}
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <title>Faculty</title>
+{% tailwind_css %}
+    <div class=" bg-black text-white p-3 rounded-full sticky top-0">
+        <div class="text-2xl ">
+        Gayatri Vidya Parishad
+        <div class="text-lg flex" style="float:right">
+        <a href="../emp_home" class="mr-10 hover:text-yellow-400 "> Home </a>  
+        <a href="../sub_updates" class="mr-10 hover:text-yellow-400"> Subject Details</a>
+        <a href="../sub_updates" class="mr-10 hover:text-yellow-400 "> Syllabus Updates </a>        
+        <a href="../salary_updates" class="mr-10 hover:text-yellow-400 "> Salary Updates </a>        
+        <a href="../leaves" class="mr-10 hover:text-yellow-400 ">leave report </a>        
+        <a href="../profile" class="mr-10 hover:text-yellow-400 "> Profile </a>        
+        <form class="logout-link"   action="{% url 'accounts:logout' %}" method = "post">
+            {% csrf_token %}
+            <button class="mr-10 hover:bg-slate-800 rounded-sm hover:text-yellow-400" type="submit">logout</button> 
+       </form>   
+      </div> 
+    </div>
+    </div>
+
+{% block body %}
+{% endblock %}

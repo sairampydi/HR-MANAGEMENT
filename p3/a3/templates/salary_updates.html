@@ -1,0 +1,38 @@
+{% extends "emp_nav.html" %}
+{% load static tailwind_tags %}
+{% block title %} salary updates {% endblock %}
+{% block body %}
+{% tailwind_css %}
+<div class=" bg-slate-200">
+    <span class="border text-4xl text-yellow-800 px-6 pt-10 pb-8  w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">This is Salary Updates</span>
+    <div class="border relative px-4 pt-7 pb-8 bg-white shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded-b-md">
+<table class="flex"> 
+    <thead class="border-spacing-2"> 
+        <tr>
+            <th  class="px-6 py-3">name</th>
+        </tr>
+        <tr>
+            <th class="px-6 py-3">employee id</th>
+        </tr>
+        <tr>
+            <th class="px-6 py-3">amount</th>
+        </tr>
+        <tr>
+            <th class="px-6 py-3">Date</th>
+        </tr>
+    </thead>
+
+    {% comment %} {% if request.salary.is_authenticated %}  {% endcomment %}
+    <tr>
+        <td>{{ salary.username}}</td>
+    </tr>
+    <tr>
+        <td>{{ salary.emp_id }}</td>
+    </tr>
+    <tr>
+        <td>{{ salary.amount }}</td>
+    </tr>
+     {% comment %} {% endif %} {% endcomment %}
+    
+</table>
+{% endblock %}

@@ -1,0 +1,20 @@
+    {% load static tailwind_tags %}
+    <title>{% block title %}nav_bar{% endblock %}</title>
+    {% tailwind_css %}
+
+    <div class=" bg-black p-3   text-white rounded-xl ">
+        <div class="text-2xl">
+        Gayatri Vidya Parishad
+        <div class="text-lg flex mb-2 mt-0 " style ="float:right;">
+        <a href=" / " class="mr-10 hover:bg-slate-800 p-1">Home</a>  
+        <a href=" user_login/ " class="mr-10 hover:bg-slate-800 p-1">Faculty</a>
+        <a href=" hr_login/ "class="mr-10 hover:bg-slate-800 p-1">Admin</a> 
+        <!-- <form class="logout-link"   action="{% url 'accounts:logout' %}" method = "post">
+            {% csrf_token %}
+            <button class="mr-10 hover:bg-slate-800 p-3" type="submit">logout</button> 
+        </form>   -->
+        </div> 
+        </div>
+        </div>
+{% block body %} {% endblock %} 
+    
