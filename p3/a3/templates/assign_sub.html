@@ -13,13 +13,13 @@
     <form action="" method="post">
         {% csrf_token %}
         <label for="name">Employee Name</label>
-        <input class="border w-full h-10 px-3 mb-5 rounded-md" type="text" name="name" placeholder="employee name">
+        <input class="border w-full h-10 px-3 mb-5 rounded-md" type="text" name="name" required placeholder="employee name">
 
         <label for="name">Employee Id</label>
-        <input class="border w-full h-10 px-3 mb-5 rounded-md" type="number" name="emp_id" placeholder="emp_id" >
+        <input class="border w-full h-10 px-3 mb-5 rounded-md" type="number" name="emp_id" required placeholder="emp_id" >
 
         <label for="name">Branch</label>
-        <input class="border w-full h-10 px-3 mb-5 rounded-md" type="text" name="branch" placeholder="Branch">
+        <input class="border w-full h-10 px-3 mb-5 rounded-md" type="text" name="branch" required placeholder="Branch">
 
         <label for="name">Year</label>
         <input class="border w-full h-10 px-3 mb-5 rounded-md" type="number" name="year" placeholder="Year">

@@ -2,7 +2,44 @@
 <head>
    <title>Document</title>
 </head>
+<style>
+body {
+    background: #6753;
+    margin-top :10%;
+}
+h1{
+  background: #
+  {% comment %} margin-left: 30%; {% endcomment %}
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+input[type="submit"]{
+  display: block;
+  background: #98E;
+  margin-top: 10px;
+}
+{% comment %} form {
+    margin-left: 30%;
+} {% endcomment %}
+{% comment %} a {
+    background: #98E;
+    border-style: solid;
+    padding: 3px;
+    color : black;
+    margin
+} {% endcomment %}
+.login {
+    background: white;
+    margin-left : 40%;
+    margin-right : 40%;
+    padding: 10px;
+}
+</style>
 <body>
+<div class=login>
     <h1>login</h1>
     <form action="" method="post">
         {% csrf_token %}
@@ -11,5 +48,6 @@
         <input type="password" name="password" id="" placeholder="password"> -->
         <input type="submit" name="" value="login" id="">
     </form>
+    </div>
 </body>
 </html>

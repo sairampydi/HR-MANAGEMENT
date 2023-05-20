@@ -6,19 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+body {
+    background: #6753;
+    
+}
+h1 {
+    background: #568;
+    padding: 30px;
+    color: white;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+input[type="submit"]{
+  display: block;
+  background: #98E;
+  margin-top: 10px;
+}
+.signup {
+    background: white;
+    margin-left : 35px;
+    margin-right : 50%;
+    padding: 10px;
+}
+</style>
 <body>
-    <h1>signup</h1>
+<div class="signup">
+    <h1>signup</h1><hr>
     <form action="" method="post">
        {% csrf_token %}
-       {% with emp=0 %}
-       {% for i in employee_id %}
-         {% with emp=emp|add:i %}
-           <input type="text" name="" value="{{ emp }}" id="">
-         {% endwith %}
-       {% endfor %}
-     {% endwith %}
      {{ form }}
         <input type="submit" name="" value="SignUp" id="">
     </form>
+  </div>
 </body>
 </html>
