@@ -90,6 +90,9 @@ def user_login(request):
         username=request.POST['username']
         password=request.POST['password']
         u = User.objects.filter(username=username).first()
+        # if u.is_accept == False:
+        #     messages.error("please contact HR department")
+        #     return redirect('user_login')
         if not u or u.employee_status != "employee":
             messages.success(request,"Incorrect Username or Password")
             return redirect("a3:hr_home")
@@ -105,20 +108,11 @@ def user_login(request):
     return render(request,'user_login.html',{'form':form})
 
 
-# logout **************
 
-
-# def user_logout(request):
-#     logout(request)
-#     return redirect(user_login)
-# @login_required(login_url='login')
 def logout_views(request):
     logout(request)
     return redirect("a3:home")
     
-
-# def user_login(request):
-#     return render(request,"user_login.html")
 
 def user_signup(request):
     return render(request,"user_signup.html")

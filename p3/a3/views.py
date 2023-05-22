@@ -32,7 +32,18 @@ def nav_bar(request):
 def delete_view(request,id):
     user = User.objects.get(pk=id)
     user.delete()
-    return redirect(reverse("a3:employees"))
+    return redirect(reverse("a3:update_employees"))
+
+def accept_view(request,id):
+    user = User.objects.get(pk = id)
+    user.delete()
+    #send mails
+    mail_subject = "HR accepted your request"
+    mail_temp = "email/accept.html"
+    #is_Accept
+    # user = User.objects.get(pk = id)
+    # user.is_accept = True
+    return redirect(reverse("a3:update_employees"))
 
 def assign_sub(request):
     if request.method == "POST":

@@ -2,7 +2,8 @@
   "dependencies": {
     "autoprefixer": "^10.4.14",
     "nodejs": "^0.0.0",
-    "postcss-cli": "^10.1.0"
+    "postcss-cli": "^10.1.0",
+    "python": "^0.0.4"
   },
   "devDependencies": {
     "tailwindcss": "^3.3.1"

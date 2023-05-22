@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+# from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -46,6 +47,14 @@ INSTALLED_APPS = [
     "a3",
     'accounts',
 ]
+
+
+# EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_PORT = int(587)
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = 'HR department<gvpce@gmail.com>'
 
 
 MIDDLEWARE = [

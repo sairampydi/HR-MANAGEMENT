@@ -4,9 +4,10 @@
 
 {% block body %} 
    {% tailwind_css %}
-    <h1> welcome to gvp</h1>
+
   <div class="relative overflow-x-auto ml-5">
     <h1 class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 bg-white w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Leave report</h1>
+      <input type="text" id="Input" placeholder="Enter your search" onkeyup ="searchfun()">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -19,7 +20,8 @@
             </tr>
         </thead>
         {% for i in employee %}
-        <tbody class="">
+        <tbody class="" id="table">
+>
         <tr>
             <td class="px-6 py-3" >{{ i.emp_id }}</td>
             <td class="px-6 py-3" >{{ i.username }}</td>
@@ -31,6 +33,32 @@
         </tr>
         </tbody>
         {% endfor %}
-    </table>
+    </table>    
 </div>
+
+{% endblock %}
+
+{%block script%}
+<script>
+const searchfun = () =>
+{
+    let element = document.getElementById("Input").value.toUpperCase();
+    let table = document.getElementById("table");
+    let tr = table.getElementsByTagName("tr");
+    for(i=0; i< tr.length; i++)
+    {
+        let td = tr[i].getElementsByTagName("td")[0];
+        if(td){
+            let text = td.textContent || td.innerHTML;
+
+            if(text.toUpperCase().indexOf(element)> -1){
+                tr[i].style.display ="";
+            }
+            else{
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+</script>   
 {% endblock %}
