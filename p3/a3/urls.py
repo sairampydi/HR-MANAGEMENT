@@ -24,6 +24,7 @@ urlpatterns = [
     path("assign_sub/", views.assign_sub , name="assign_sub"),
     path("sub_updates/", views.sub_updates , name="sub_updates"),
     path("<int:id>/delete/",views.delete_view,name="delete"),
+    path("<int:id>/delete_v/",views.delete_v,name="delete_v"),
     path("<int:id>/accept/",views.accept_view,name="accept"),
 
     # path("",views.home,name="leaves.html")

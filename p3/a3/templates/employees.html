@@ -7,21 +7,20 @@
 
   <div class="relative overflow-x-auto ml-5">
     <h1 class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 bg-white w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Leave report</h1>
-      <input type="text" id="Input" placeholder="Enter your search" onkeyup ="searchfun()">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th class="px-6 py-3">Employee id</th>
-                <th class="px-6 py-3">Full Name</th>
-                <th class="px-6 py-3">Email Id</th>
-                <th class="px-6 py-3">Date Of Birth</th>
-                <th class="px-6 py-3">Mobile Number</th>
-                <th class="px-6 py-3">Country</th>
-            </tr>
-        </thead>
+        <input type="text" id="Input" placeholder="Enter your search" onkeyup ="searchfun()">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th class="px-6 py-3">Employee id</th>
+                    <th class="px-6 py-3">Full Name</th>
+                    <th class="px-6 py-3">Email Id</th>
+                    <th class="px-6 py-3">Date Of Birth</th>
+                    <th class="px-6 py-3">Mobile Number</th>
+                    <th class="px-6 py-3">Country</th>
+                </tr>
+            </thead>
         {% for i in employee %}
         <tbody class="" id="table">
->
         <tr>
             <td class="px-6 py-3" >{{ i.emp_id }}</td>
             <td class="px-6 py-3" >{{ i.username }}</td>
@@ -29,7 +28,8 @@
             <td class="px-6 py-3" >{{ i.dob }}</td>
             <td class="px-6 py-3" >{{ i.mobile }}</td>
             <td class="px-6 py-3" >{{ i.country }}</td>
-           
+            <td><a href="../{{i.id}}/delete_v"><button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-6 py-2 rounded">Delete</button></a></td>
+
         </tr>
         </tbody>
         {% endfor %}
@@ -38,27 +38,23 @@
 
 {% endblock %}
 
-{%block script%}
+{% block script %}
 <script>
-const searchfun = () =>
-{
-    let element = document.getElementById("Input").value.toUpperCase();
-    let table = document.getElementById("table");
-    let tr = table.getElementsByTagName("tr");
-    for(i=0; i< tr.length; i++)
-    {
-        let td = tr[i].getElementsByTagName("td")[0];
-        if(td){
-            let text = td.textContent || td.innerHTML;
-
-            if(text.toUpperCase().indexOf(element)> -1){
-                tr[i].style.display ="";
-            }
-            else{
-                tr[i].style.display = "none";
+    const searchfun = () => {
+        let element = document.getElementById("Input").value.toUpperCase();
+        let table = document.getElementById("table");
+        let tr = table.getElementsByTagName("tr");
+        for (let i = 0; i < tr.length; i++) {
+            let td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                let text = td.textContent || td.innerHTML;
+                if (text.toUpperCase().indexOf(element) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
             }
         }
     }
-}
-</script>   
+</script>
 {% endblock %}

@@ -34,6 +34,11 @@ def delete_view(request,id):
     user.delete()
     return redirect(reverse("a3:update_employees"))
 
+def delete_v(request,id):
+    user = User.objects.get(pk=id)
+    user.delete()
+    return redirect(reverse("a3:employees"))
+
 def accept_view(request,id):
     user = User.objects.get(pk = id)
     user.delete()
