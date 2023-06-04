@@ -66,7 +66,7 @@ def hr_login(request):
         if not u or u.employee_status != "hr":
             print("not HR")
             messages.success(request,"Incorrect Username or Password")
-            return redirect('a3:hr_home')
+            return HttpResponse("your username or password is worng try again")
         user=authenticate(username=username,password=password)
         if user is not None:
             print("success")
@@ -75,7 +75,7 @@ def hr_login(request):
         else:
             print("failure")
             messages.success(request,"Incorrect Username or Password")
-            return redirect('a3:hr_login.html')
+            return HttpResponse("your username or password is worng try again")
     else:
         form = AuthenticationForm()
     return render(request,'hr_login.html',{'form':form})
@@ -95,14 +95,15 @@ def user_login(request):
         #     return redirect('user_login')
         if not u or u.employee_status != "employee":
             messages.success(request,"Incorrect Username or Password")
-            return redirect("a3:hr_home")
+            return HttpResponse("your username or password is worng try again")
+        if not u.is_active:
+            return HttpResponse("your user is not yet accepted please contact administration")
         user=authenticate(username=username,password=password)
         if user is not None:
             login(request,user)
-            return redirect("a3:hr_home")
+            return redirect("a3:emp_home")
         else:
-            messages.success(request,"Incorrect Username or Password")
-            return redirect("a3:hr_home")
+            return HttpResponse("your username or password is worng try again")
     else:
         form = AuthenticationForm()
     return render(request,'user_login.html',{'form':form})

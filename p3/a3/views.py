@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from .models import Leaves , Salary , Profile , Assign_sub
+from .models import Leaves , Salary , Profile , Assign_sub , Feedback
 from django.http import HttpResponse
 # from .forms import Leaves
 from.import forms
@@ -29,19 +29,46 @@ def hr_nav(request):
 def nav_bar(request):
     return render(request,"nav_bar.html")
 
+def feedback(request):
+    employee = Profile.objects.all().order_by("pk")
+    return render(request,"feedback.html",{"employee":employee})
+
+def feedbackform(request):
+    if request.method == "POST":
+        print("auth")
+        form = forms.Feedback(request.POST)
+        form.request = request
+        if form.is_valid():
+            try:
+                form.save()
+            except Exception as e:
+                return HttpResponse(e)
+            return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../emp_home'><button>Goto Home</button></a>")
+        else:
+            form = forms.Feedback()
+        return render(request,"feedbackform.html",{'form':form})
+    else:
+        print("failed")
+        form = Feedback()
+    return render(request,"feedbackform.html")
+
+
 def delete_view(request,id):
     user = User.objects.get(pk=id)
     user.delete()
     return redirect(reverse("a3:update_employees"))
 
 def delete_v(request,id):
-    user = User.objects.get(pk=id)
+    user = Profile.objects.get(pk=id)
     user.delete()
     return redirect(reverse("a3:employees"))
 
+
 def accept_view(request,id):
     user = User.objects.get(pk = id)
-    user.delete()
+    # user.delete().
+    user.is_active = True
+    user.save()
     #send mails
     mail_subject = "HR accepted your request"
     mail_temp = "email/accept.html"
@@ -56,8 +83,11 @@ def assign_sub(request):
         form = forms.Assign_sub(request.POST)
         if form.is_valid():
             print("saved")
-            form.save()
-            return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../hr_home'><button>Goto Home</button></a>")
+            try:
+                form.save()
+                return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../hr_home'><button>Goto Home</button></a>")
+            except Exception:
+                return HttpResponse('user does not exist')
         else:
             form = forms.Assign_sub()
         return render(request,"assign_sub.html",{'form':form})
@@ -92,7 +122,7 @@ def employees(request):
 
 def update_employees(request):
     # employee = User.objects.filter(employee_status = "employee")
-    employee = User.objects.all().order_by("pk")
+    employee = User.objects.filter(is_active=False).order_by("pk")
     return render(request,"update_employees.html",{"update_employee":employee})
 
 def add_salary(request):
@@ -101,6 +131,7 @@ def add_salary(request):
         form = forms.Salary(request.POST)
         if form.is_valid():
             print("saved")
+            print(form)
             form.save()
             return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../hr_home'><button>goto home</button></a>")
         else:
@@ -118,7 +149,7 @@ def salary_updates(request):
     username = request.user.username
     #user = User.objects.get(username=username)
     #salary = user.salary
-    salary= Salary.objects.filter(username = username)
+    salary= Salary.objects.filter(username = username).first()
     context ={
         "salary":salary,
         #"user" : user

@@ -9,9 +9,10 @@ class Userform(UserCreationForm):
     class Meta :
         model= User
         fields = UserCreationForm.Meta.fields + ('branch',)
-        def save(self, commit=True):
-            user = super().save(commit=False)
-            user.branch = self.cleaned_data['branch']
-            if commit:
-                user.save()
-            return user
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_active = False
+        user.branch = self.cleaned_data['branch']
+        if commit:
+            user.save()
+        return user

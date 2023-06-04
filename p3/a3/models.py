@@ -1,6 +1,5 @@
 from django.db import models
 from datetime import datetime
-import random
 
 class Leaves(models.Model):
     name = models.CharField(max_length=20)
@@ -16,6 +15,58 @@ class Leaves(models.Model):
     )
     reason = models.CharField(max_length=100, choices=reason_options, default= "vacation")
     enterreason = models.CharField(max_length=100 ,null = True)
+
+    def __str__(self):
+        return self.name
+    
+class Feedback(models.Model):
+    name = models.CharField(max_length=20)
+    # enter_id =  models.AutoField()
+    CS_options = (
+        ('excellent', 'Excellent'),
+        ('good', 'Good'),
+        ('satisfactory', 'Satisfactory'),
+        ('improvement', 'Improvement'),
+        ('below', 'Below'),
+    )
+    CommunicationSkills= models.CharField(max_length=100, choices=CS_options, default= "below")
+    TC_options = (
+        ('excellent', 'Excellent'),
+        ('good', 'Good'),
+        ('satisfactory', 'Satisfactory'),
+        ('improvement', 'Improvement'),
+        ('below', 'Below'),
+    )
+    TeamworkandCollaboration= models.CharField(max_length=100, choices=TC_options, default= "below")
+    PT_options = (
+        ('excellent', 'Excellent'),
+        ('good', 'Good'),
+        ('satisfactory', 'Satisfactory'),
+        ('improvement', 'Improvement'),
+        ('below', 'Below'),
+    )
+    ProductivityandTimeManagement= models.CharField(max_length=100, choices=PT_options, default= "below")
+    PW_options = (
+        ('excellent', 'Excellent'),
+        ('good', 'Good'),
+        ('satisfactory', 'Satisfactory'),
+        ('improvement', 'Improvement'),
+        ('below', 'Below'),
+    )
+    ProfessionalismandWorkEthic= models.CharField(max_length=100, choices=PW_options, default= "below")
+    JS_options = (
+        ('excellent', 'Excellent'),
+        ('good', 'Good'),
+        ('satisfactory', 'Satisfactory'),
+        ('improvement', 'Improvement'),
+        ('below', 'Below'),
+    )
+    JobKnowledgeandSkills= models.CharField(max_length=100, choices=JS_options, default= "below")
+    date = models.DateField(blank=True, null=True)
+    comments= models.CharField(max_length=100 ,null = True)
+    officername = models.CharField(max_length=20)
+    Position= models.CharField(max_length=20)
+
 
     def __str__(self):
         return self.name
