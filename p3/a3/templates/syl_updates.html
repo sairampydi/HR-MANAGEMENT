@@ -10,27 +10,27 @@
 
     <div class=" bg-slate-200">
         <div class=" bg-slate-200 py-6  sm:py-12">
-        <center> <span class="border text-4xl text-yellow-800 font-bold px-6 pt-10 pb-8  w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">LEAVE REPORT</span></center>
+        <center> <span class="border text-4xl text-yellow-800 font-bold px-6 pt-10 pb-8  w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Syllabus Updates</span></center>
         <div class="border relative px-4 pt-7 pb-8 bg-white shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded-b-md">
         <form action=""  method="post">
             {% csrf_token %} 
             <!-- {{ forms }} -->
-            <label for="name">Full Name</label>
-            <input  class="border w-full h-10 px-3 mb-5 rounded-md" type="text" required name="name" placeholder="" id="">
-            <label for="startdate">Leave Start Date</label>
-            <input  class="border w-full h-10 px-3 mb-5 rounded-md" type="date" required name="startdate" id="">
-            <label for="enddate">Leave End Date</label>
-            <input  class="border w-full h-10 px-3 mb-5 rounded-md" type="date" required name="lastdate" id="">
-            <label for="select reason">Select Reason</label>
-            <select required name="reason" class="border w-full h-10 px-3 mb-5 rounded-md" id="leave" >
-                <option value="vacation">vacation</option>
-                <option value="sick-family">sick-family</option>
-                <option value="sick-self">sick-self</option>
-                <option value="funeral"> Funeral </option>
-                <option value="others"> Others </option>
-            </select>
-            <label for="enter reason">Enter Reason</label>
-            <textarea required name="enterreason" id="textbox" class="border w-full  px-3 mb-5 rounded-md"></textarea>
+            <label for="name">User Name</label>
+            <input  class="border w-full h-10 px-3 mb-5 rounded-md" type="text" required name="name" placeholder="username" id="">
+            <label for="name">Employee Id</label>
+            <input  class="border w-full h-10 px-3 mb-5 rounded-md" type="text" required name="emp_id" placeholder="Employee Id" id="">
+            <label for="name">Subject Name</label>
+            <input  class="border w-full h-10 px-3 mb-5 rounded-md" type="text" required name="subject" placeholder="Subject Name" id="">
+            <label for="name">Branch</label>
+            <input  class="border w-full h-10 px-3 mb-5 rounded-md" type="text" required name="branch" placeholder="Branch" id="">
+            <label for="name">Section</label>
+            <input  class="border w-full h-10 px-3 mb-5 rounded-md" type="text" required name="Section" placeholder="Branch" id="">
+            <label for="startdate">Start Date</label>
+            <input  class="border w-full h-10 px-3 mb-5 rounded-md" type="date" required name="startdate" placeholder="Start Date" id="">
+            <label for="enddate">Number of Units Completed</label>
+            <input  class="border w-full h-10 px-3 mb-5 rounded-md" type="text" required name="units" placeholder="Units" id="">
+            <label for="select reason">Current Unit</label>
+            <input  class="border w-full h-10 px-3 mb-5 rounded-md" type="text" required name="current" placeholder="Current Unit" id="">
             <input type="submit" name="submit" id="submit" value="Submit" class="ml-24 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-16 py-3 rounded">
         </form>
     

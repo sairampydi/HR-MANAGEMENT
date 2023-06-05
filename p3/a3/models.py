@@ -108,3 +108,17 @@ class Assign_sub(models.Model):
     def __str__(self):
         return self.name
      
+
+class Syl_updates(models.Model):
+    name = models.CharField(max_length=20)
+    emp_id = models.IntegerField(default= 1)
+    subject = models.CharField(max_length=30)
+    branch = models.CharField(max_length=30)
+    section = models.CharField(max_length=30)
+    startdate = models.DateField(blank=True, null=True)
+    units = models.CharField(max_length= 30)
+    current = models.CharField(max_length= 30)
+
+    def __str__(self):
+        return self.name
+     

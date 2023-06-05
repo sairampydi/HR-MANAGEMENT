@@ -2,7 +2,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Faculty</title>
     {% tailwind_css %}
-    <div class=" bg-black text-white p-3 rounded-full sticky">
+    {% comment %} <div class=" bg-black text-white p-3 rounded-full sticky">
         <div class="text-2xl">
         Gayatri Vidya Parishad
         <div class="text-sm flex" style ="float:right;">
@@ -19,6 +19,49 @@
        </form>     
     </div> 
     </div>
+    </div> {% endcomment %}
+
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <nav class="bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between py-4">
+        <div>
+          <a href="#" class="text-white text-xl font-bold">Gayatri Vidya Parishad</a>
+        </div>
+        <div class="hidden md:block">
+          <ul class="flex space-x-4">
+            <li>
+              <a href="../hr_home" class="text-white hover:text-gray-300">Home</a>
+            </li>
+            <li>
+              <a href="user_login/ " class="text-white hover:text-gray-300">Recent Employees </a>
+            </li>
+            <li>
+              <a href="user_login/ " class="text-white hover:text-gray-300">Employees</a>
+            </li>
+            <li>
+              <a href="user_login/ " class="text-white hover:text-gray-300">Assign Subject </a>
+            </li>
+            <li>
+              <a href="user_login/ " class="text-white hover:text-gray-300">Syllabus Updates</a>
+            </li>
+            <li>
+              <a href="user_login/ " class="text-white hover:text-gray-300">add Salary</a>
+            </li>
+            <li>
+              <a href=" hr_login/ " class="text-white hover:text-gray-300">leave report</a>
+            </li>
+            <form class="logout-link"   action="{% url 'accounts:logout' %}" method = "post">
+            {% csrf_token %}
+            <button class="mr-10 hover:text-yellow-400 text-white" type="submit">logout</button> 
+            </form>  
+          </ul>
+        </div>
+      </div>
     </div>
+  </nav>
 {% block body %}
 {%  endblock %}

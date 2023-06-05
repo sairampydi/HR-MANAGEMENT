@@ -1,7 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from .models import Leaves , Salary , Profile , Assign_sub , Feedback
+from .models import Leaves , Salary , Profile , Assign_sub , Feedback , Syl_updates
 from django.http import HttpResponse
-# from .forms import Leaves
 from.import forms
 from accounts.models import User
 from django.urls import reverse
@@ -15,13 +14,7 @@ def hr_home(request):
     return render(request,"hr_home.html")
 
 def emp_home(request):
-    # profile = Profile.objects.all()
-    # user = User.objects.all()
-    # if(profile.username == user.username):
         return render(request,"emp_home.html")
-    # else:
-    #     return redirect("emp_home")
-    
 
 def hr_nav(request):
     return render(request,"hr_nav.html")
@@ -52,7 +45,6 @@ def feedbackform(request):
         form = Feedback()
     return render(request,"feedbackform.html")
 
-
 def delete_view(request,id):
     user = User.objects.get(pk=id)
     user.delete()
@@ -63,7 +55,6 @@ def delete_v(request,id):
     user.delete()
     return redirect(reverse("a3:employees"))
 
-
 def accept_view(request,id):
     user = User.objects.get(pk = id)
     # user.delete().
@@ -72,9 +63,6 @@ def accept_view(request,id):
     #send mails
     mail_subject = "HR accepted your request"
     mail_temp = "email/accept.html"
-    #is_Accept
-    # user = User.objects.get(pk = id)
-    # user.is_accept = True
     return redirect(reverse("a3:update_employees"))
 
 def assign_sub(request):
@@ -82,7 +70,6 @@ def assign_sub(request):
         print("auth")
         form = forms.Assign_sub(request.POST)
         if form.is_valid():
-            print("saved")
             try:
                 form.save()
                 return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../hr_home'><button>Goto Home</button></a>")
@@ -95,6 +82,14 @@ def assign_sub(request):
         print("failed")
         form = Assign_sub()
     return render(request,"assign_sub.html")
+
+def emp_profile(request):
+    username = request.user.username
+    profile = Profile.objects.filter(username = username).first()
+    context={
+        "profile" : profile
+    }
+    return render(request,"emp_profile.html",context)
 
 def emp_nav(request):
     return render(request,"emp_nav.html")
@@ -111,7 +106,6 @@ def profile(request):
             return redirect('a3:profile')
     else:
         print("failed")
-        #form= Profile()
     return render(request,"profile.html")
 
 
@@ -130,14 +124,12 @@ def add_salary(request):
         print("auth")
         form = forms.Salary(request.POST)
         if form.is_valid():
-            print("saved")
-            print(form)
-            form.save()
-            return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../hr_home'><button>goto home</button></a>")
-        else:
-            return HttpResponse("form is not vallid")
+            try:
+                form.save()
+                return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../hr_home'><button>Goto Home</button></a>")
+            except Exception:
+                return HttpResponse('user does not exist')
     else:
-        print("failed")
         form= Salary()
     return render(request,"add_salary.html")
 
@@ -164,13 +156,34 @@ def sub_updates(request):
     subject= Assign_sub.objects.all().order_by("name")
     return render(request,"sub_updates.html", {"subject":subject})
 
+def syl_updates(request):
+    if request.method == "POST":
+        print("auth")
+        form = forms.Syl_updates(request.POST)
+        if form.is_valid():
+            print("saved")
+            try:
+                form.save()
+                return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../emp_home'><button>Goto Home</button></a>")
+            except Exception:
+                return HttpResponse('user does not exist')
+        else:
+            HttpResponse("form is not valid")
+    else:
+        print("failed")
+        form= Syl_updates()
+    return render(request,"syl_updates.html")
+
 # @login_required(login_url = "/login")
 def leaves(request):
     if request.method == 'POST':
         form =forms.Leaves(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("a3:home")
+            try:
+                form.save()
+                return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../emp_home'><button>Goto Home</button></a>")
+            except Exception:
+                return HttpResponse('user does not exist')
     else:
         form = Leaves()
     return render(request, 'leaves.html', {'form': form})

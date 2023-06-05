@@ -1,7 +1,11 @@
 {% extends 'nav_bar.html' %}
-
+{% load static tailwind_tags %}
     <title>{% block title %} home  {% endblock %}</title>
 
 {% block body %}
-    Hi ! this is home page
+<script src="https://cdn.tailwindcss.com"></script>
+{% tailwind_css %}
+    <img src ="{% static 'gvpce.jpg' %}" class="w-full">
+
+{% include "footer.html"%}
 {% endblock %}

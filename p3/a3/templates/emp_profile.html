@@ -1,0 +1,47 @@
+{% extends "emp_nav.html"  %}
+{% load static tailwind_tags  %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+{% block body %}
+{% tailwind_css %}
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class=" bg-slate-200">
+
+    <div class=" bg-white max-w-xl mx-auto sm:px-10 ">
+    <h1 class="text-5xl text-yellow-800 border-b-4 mb-4 border-black">Profile</h1> 
+    <div class="container mx-auto flex">
+        <div class="grid grid-cols-1 ">
+            <div class="bg-gray-200 py-4 px-12 m-2">Name</div>
+            <div class="bg-gray-200 py-4 px-12 m-2">Email</div>
+            <div class="bg-gray-200 py-4 px-12 m-2">First Name</div>
+            <div class="bg-gray-200 py-4 px-12 m-2">Last name</div>
+            <div class="bg-gray-200 py-4 px-12 m-2">Empoloyee Id</div>
+            <div class="bg-gray-200 py-4 px-12 m-2">Date of Birth</div>
+            <div class="bg-gray-200 py-4 px-12 m-2">Mobile Number</div>
+            <div class="bg-gray-200 py-4 px-12 m-2">Address</div>
+            <div class="bg-gray-200 py-4 px-12 m-2">City</div>
+            <div class="bg-gray-200 py-4 px-12 m-2">Country</div>
+            <div class="bg-gray-200 py-4 px-12 m-2">Postal Code</div>
+        </div>
+        <div class="grid grid-cols-1 ">
+            <div class="bg-gray-200 py-4 px-12  m-2">{{ profile.username }}</div>
+            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.email }}</div>
+            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.firstname }}</div>
+            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.lastname }}</div>  
+            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.emp_id }}</div>  
+            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.dob }}</div>  
+            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.mobile }}</div>  
+            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.address }}</div>  
+            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.city }}</div>  
+            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.country }}</div>  
+            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.postal_code }}</div>  
+        </div>
+    </div>
+    </div>
+    </div>
+
+{% endblock %}

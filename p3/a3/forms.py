@@ -8,20 +8,15 @@ class Leaves(forms.ModelForm):
         model = models.Leaves
         fields =( "name","startdate","lastdate","enterreason", "reason", )
     
-        def clean(self):
-            cleaned_data = super().clean()
-            name = cleaned_data.get('name')
-            # emp_id = cleaned_data.get('emp_id')
-            try:
-                User.objects.get(username=name)
-                pass
-            except:
-                self.add_error('username', 'User does not exists.')
-                
-            # Check if product with same name and price exists in the database
-            # existing_User = User.objects.filter(username=name, emp_id=emp_id).first()
-            # if not existing_User:
-            #     raise forms.ValidationError('user name and employee id is incorrect')
+    def save(self):
+        name = self.cleaned_data.get('name')
+        emp_id = self.cleaned_data.get('emp_id')
+        User.objects.get(username=name,emp_id=emp_id)
+        user = super().save()
+        # Check if product with same name and price exists in the database
+        # existing_User = User.objects.filter(username=name, emp_id=emp_id).first()
+        # if not existing_User:
+        #     raise forms.ValidationError('user name and employee id is incorrect')
 class Feedback(forms.ModelForm):
     class Meta:
         model = models.Feedback
@@ -78,3 +73,13 @@ class Profile(forms.ModelForm):
                 pass
             except:
                 self.add_error('username', 'User does not exists.')
+
+class Syl_updates(forms.ModelForm):
+    class Meta:
+        model = models.Syl_updates
+        fields =("name","emp_id","subject","branch","section","startdate","units","current")
+    def save(self):
+        name = self.cleaned_data.get('name')
+        emp_id = self.cleaned_data.get('emp_id')
+        User.objects.get(username=name,emp_id = emp_id)
+        user = super().save()
