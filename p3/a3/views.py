@@ -55,6 +55,11 @@ def delete_v(request,id):
     user.delete()
     return redirect(reverse("a3:employees"))
 
+def delete_z(request,id):
+    user = Leaves.objects.get(pk=id)
+    user.delete()
+    return redirect(reverse("a3:leaves_report"))
+
 def accept_view(request,id):
     user = User.objects.get(pk = id)
     # user.delete().
@@ -99,12 +104,15 @@ def profile(request):
         print("auth")
         form = forms.Profile( request.POST,)
         if form.is_valid():
-            print("saved")
-            form.save()
-            return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../user_login'><button>Goto Home</button></a>")
+            try:
+                form.save()
+                return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../user_login'><button>Goto Home</button></a>")
+            except Exception:
+                return HttpResponse("<p style='color:green; font-size:40px;'>user does not exist")
+
         else:
             return redirect('a3:profile')
-    else:
+    else:            
         print("failed")
     return render(request,"profile.html")
 
@@ -113,6 +121,11 @@ def employees(request):
     # employee = User.objects.filter(employee_status = "employee")
     employee = Profile.objects.all().order_by("pk")
     return render(request,"employees.html",{"employee":employee})
+
+def syllabus(request):
+    # employee = User.objects.filter(employee_status = "employee")
+    syllabus = Syl_updates.objects.all().order_by("pk")
+    return render(request,"syllabus.html",{"syllabus":syllabus})
 
 def update_employees(request):
     # employee = User.objects.filter(employee_status = "employee")
@@ -128,7 +141,7 @@ def add_salary(request):
                 form.save()
                 return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../hr_home'><button>Goto Home</button></a>")
             except Exception:
-                return HttpResponse('user does not exist')
+                return HttpResponse("<p style='color:green; font-size:40px;'>user does not exist")
     else:
         form= Salary()
     return render(request,"add_salary.html")
@@ -149,11 +162,13 @@ def salary_updates(request):
     return render(request,"salary_updates.html",context)
 
 def sal_details(request):
-    salary= Salary.objects.all().order_by("date")
+    username = request.user.username
+    salary= Salary.objects.filter(name= username)
     return render(request,"sal_details.html", {"salary":salary})
 
 def sub_updates(request):
-    subject= Assign_sub.objects.all().order_by("name")
+    username = request.user.username
+    subject= Assign_sub.objects.filter(name = username).first()
     return render(request,"sub_updates.html", {"subject":subject})
 
 def syl_updates(request):
@@ -166,7 +181,7 @@ def syl_updates(request):
                 form.save()
                 return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../emp_home'><button>Goto Home</button></a>")
             except Exception:
-                return HttpResponse('user does not exist')
+                return HttpResponse(" <p style='color:green; font-size:40px;'>user does not exist")
         else:
             HttpResponse("form is not valid")
     else:
@@ -183,7 +198,7 @@ def leaves(request):
                 form.save()
                 return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../emp_home'><button>Goto Home</button></a>")
             except Exception:
-                return HttpResponse('user does not exist')
+                return HttpResponse('<p style="color:green; font-size:40px;">user does not exist')
     else:
         form = Leaves()
     return render(request, 'leaves.html', {'form': form})

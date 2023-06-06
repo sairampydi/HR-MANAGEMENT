@@ -3,7 +3,28 @@
 {% block title %} salary updates {% endblock %}
 {% block body %}
 {% tailwind_css %}
-<div class=" bg-slate-200">
+<div class=" ">
+    <center><div class="border text-4xl text-yellow-800 px-6 pt-10 pb-8  w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">This is Salary Updates</div></center>
+    <div class="border relative px-4 pt-7 pb-8 bg-white shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded-b-md flex">
+        <div id="main" class="grid grid-rows-4 grid-flow-col gap-8 justify-center">
+            <div class=" w-26  h-12">Name</div> 
+            <div class=" w-26 h-12">Employee</div>
+            <div class=" w-26 h-12">Amount</div>
+            <div class=" w-26 h-12">Date</div>
+            <div class=" w-26  h-12">:</div> 
+            <div class=" w-26 h-12">:</div>
+            <div class=" w-26 h-12">:</div>
+            <div class=" w-26 h-12">:</div>
+            <div class=" w-26 h-12"> {{ salary.username }} </div>
+            <div class=" w-26 h-12"> {{ salary.emp_id }} </div>
+            <div class=" w-26 h-12"> {{ salary.amount }} </div>
+            <div class=" w-26 h-12"> {{ salary.date }} </div>
+            
+</div>       
+
+
+
+{% comment %} <div class=" bg-slate-200">
     <span class="border text-4xl text-yellow-800 px-6 pt-10 pb-8  w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">This is Salary Updates</span>
     <div class="border relative px-4 pt-7 pb-8 bg-white shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded-b-md">
 <table class="flex"> 
@@ -22,7 +43,6 @@
         </tr>
     </thead>
 
-    {% comment %} {% if request.salary.is_authenticated %}  {% endcomment %}
     <tr>
         <td>{{ salary.username}}</td>
     </tr>
@@ -31,8 +51,6 @@
     </tr>
     <tr>
         <td>{{ salary.amount }}</td>
-    </tr>
-     {% comment %} {% endif %} {% endcomment %}
-    
-</table>
+    </tr>    
+</table> {% endcomment %}
 {% endblock %}

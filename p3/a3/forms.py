@@ -50,29 +50,21 @@ class Salary(forms.ModelForm):
     class Meta:
         model = models.Salary
         fields =("username","emp_id","amount",)
-        def clean(self):
-            cleaned_data = super().clean()
-            name = cleaned_data.get('name')
-            # emp_id = cleaned_data.get('emp_id')
-            try:
-                User.objects.get(username=name)
-                pass
-            except:
-                self.add_error('username', 'User does not exists.')
+        def save(self):
+            name = self.cleaned_data.get('name')
+            emp_id = self.cleaned_data.get('emp_id')
+            User.objects.get(username=name,emp_id=emp_id)
+            user = super().save()
+
 
 class Profile(forms.ModelForm):
     class Meta:
         model = models.Profile
         fields =( "username","email","firstname","lastname","emp_id","dob","mobile","address","city","country","postal_code", )
-        def clean(self):
-            cleaned_data = super().clean()
-            name = cleaned_data.get('name')
-            # emp_id = cleaned_data.get('emp_id')
-            try:
-                User.objects.get(username=name)
-                pass
-            except:
-                self.add_error('username', 'User does not exists.')
+        def save(self):
+            name = self.cleaned_data.get('name')
+            User.objects.get(username=name)
+            user = super().save()
 
 class Syl_updates(forms.ModelForm):
     class Meta:

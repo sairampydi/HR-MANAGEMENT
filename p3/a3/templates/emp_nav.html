@@ -2,7 +2,52 @@
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <title>Faculty</title>
 {% tailwind_css %}
-    <div class=" bg-black text-white p-3 rounded-full sticky">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <nav class="bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between py-4">
+        <div>
+          <a href="#" class="text-white text-xl font-bold">Gayatri Vidya Parishad</a>
+        </div>
+        <div class="hidden md:block">
+          <ul class="flex space-x-4">
+            <li>
+              <a href="../emp_home" class="text-white hover:text-gray-300">Home</a>
+            </li>
+            <li>
+              <a href="../sub_updates" class="text-white hover:text-gray-300">Subject Details</a>
+            </li>
+            <li>
+              <a href="../syl_updates" class="text-white hover:text-gray-300">Syllabus Updates</a>
+            </li>
+            <li>
+              <a href="../salary_updates" class="text-white hover:text-gray-300">Salary Updates </a>
+            </li>
+            <li>
+              <a href="../leaves" class="text-white hover:text-gray-300">Apply leave  </a>
+            </li>
+            <li>
+              <a href=" ../emp_profile" class="text-white hover:text-gray-300"> Profile </a>
+            </li>
+            <li>
+              <a href="../feedback" class="text-white hover:text-gray-300">feedback</a>
+            </li>
+            <form class="logout-link"   action="{% url 'accounts:logout' %}" method = "post">
+            {% csrf_token %}
+            <button class="mr-10 hover:text-yellow-400 text-white" type="submit">logout</button> 
+            </form>  
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+{% block body %}
+{%  endblock %} 
+
+
+
+
+{% comment %} <div class=" bg-black text-white p-3 rounded-full sticky">
         <div class="text-2xl ">
         Gayatri Vidya Parishad
         <div class="text-lg flex" style="float:right">
@@ -19,7 +64,7 @@
        </form>   
       </div> 
     </div>
-    </div>
+    </div> {% endcomment %}
 
-{% block body %}
-{% endblock %}
+{% comment %} {% block body %}
+{% endblock %} {% endcomment %}

@@ -25,11 +25,10 @@ body{
             <div class=" w-26 h-12">:</div>
             <div class=" w-26 h-12">:</div>
             <div class=" w-26 h-12">:</div>
-            {%  for i in subject %}
-            <div class=" w-26 h-12"> {{ i.branch }} </div>
-            <div class=" w-26 h-12"> {{ i.year }} </div>
-            <div class=" w-26 h-12"> {{ i.section }} </div>
-            <div class=" w-26 h-12"> {{ i.subject }} </div>
-            {% endfor %}
+            <div class=" w-26 h-12"> {{ subject.branch }} </div>
+            <div class=" w-26 h-12"> {{ subject.year }} </div>
+            <div class=" w-26 h-12"> {{ subject.section }} </div>
+            <div class=" w-26 h-12"> {{ subject.subject }} </div>
+            
 </div>       
 {% endblock %} 

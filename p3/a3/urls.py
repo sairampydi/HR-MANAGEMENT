@@ -21,6 +21,7 @@ urlpatterns = [
     path("emp_home/",views.emp_home,name="emp_home"),
     path("hr_nav/",views.hr_nav,name="hr_nav"),
     path("profile/",views.profile,name="profile"),
+    path("syllabus/",views.syllabus,name="syllabus"),
     path("emp_profile/",views.emp_profile,name="emp_profile"),
     path("feedback/",views.feedback,name="feedback"),
     path("feedbackform/",views.feedbackform,name="feedbackfrom"),
@@ -29,6 +30,7 @@ urlpatterns = [
     path("syl_updates/", views.syl_updates , name="syl_updates"),
     path("<int:id>/delete/",views.delete_view,name="delete"),
     path("<int:id>/delete_v/",views.delete_v,name="delete_v"),
+    path("<int:id>/delete_z/",views.delete_z,name="delete_z"),
     path("<int:id>/accept/",views.accept_view,name="accept"),
 
     # path("",views.home,name="leaves.html")
