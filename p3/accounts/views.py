@@ -43,16 +43,6 @@ def signup_views(request):
     form = Userform
     return render(request,"signup.html",{'form':form})
 
-# def login_views(request):
-#     if request.method == "POST":
-#         form = AuthenticationForm(data = request.POST)
-#         if form.is_valid():
-#             user=form.get_user()
-#             login(request,user)
-#             return redirect('a3:leaves')
-#     else:
-#         form = AuthenticationForm()
-#     return render(request,'login.html',{'form':form})
 
 @never_cache
 def hr_login(request):

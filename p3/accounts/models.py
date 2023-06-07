@@ -12,6 +12,11 @@ class User(AbstractUser):
         ('employee', 'Employee'),
     )
     employee_status = models.CharField(max_length=32,default="employee",choices= employee_options)
+    position_options = (
+        ('hod', 'Hod'),
+        ('employee', 'Employee'),
+    )
+    position = models.CharField(max_length=30,default="none",choices= position_options)
     employee_id = models.CharField( max_length=5, default=2110, primary_key =True),
     date_created = models.DateField(default=datetime.now)
     branch = models.CharField(max_length=20,default = "none")

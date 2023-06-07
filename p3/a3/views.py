@@ -79,7 +79,7 @@ def assign_sub(request):
                 form.save()
                 return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../hr_home'><button>Goto Home</button></a>")
             except Exception:
-                return HttpResponse('user does not exist')
+                return HttpResponse('<body style="background-color: #f8f8f8;  color: #333;  border: 2px solid #ccc;  padding: 20px;  border-radius: 6px;  text-align: center;  max-width: 400px;  margin: 0 auto; font-size: 40px;  display: block;  margin-bottom: 20px;}">Oops, something went wrong</body>')
         else:
             form = forms.Assign_sub()
         return render(request,"assign_sub.html",{'form':form})
@@ -146,9 +146,7 @@ def add_salary(request):
         form= Salary()
     return render(request,"add_salary.html")
 
-def leaves_report(request):
-    leaves= Leaves.objects.all().order_by("startdate")
-    return render(request,"leaves_report.html", {"leaves":leaves},)
+
 
 def salary_updates(request):
     username = request.user.username
@@ -162,9 +160,12 @@ def salary_updates(request):
     return render(request,"salary_updates.html",context)
 
 def sal_details(request):
-    username = request.user.username
-    salary= Salary.objects.filter(name= username)
+    salary= Salary.objects.all().order_by("date")
     return render(request,"sal_details.html", {"salary":salary})
+
+def sub_details(request):
+    subjects= Assign_sub.objects.all().order_by("emp_id")
+    return render(request,"sub_details.html", {"subjects":subjects})
 
 def sub_updates(request):
     username = request.user.username
@@ -187,6 +188,7 @@ def syl_updates(request):
     else:
         print("failed")
         form= Syl_updates()
+    print("end")
     return render(request,"syl_updates.html")
 
 # @login_required(login_url = "/login")
@@ -198,8 +200,11 @@ def leaves(request):
                 form.save()
                 return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../emp_home'><button>Goto Home</button></a>")
             except Exception:
-                return HttpResponse('<p style="color:green; font-size:40px;">user does not exist')
+                return HttpResponse('<p style="color:green; font-size:40px;">user does not exist</p>')
     else:
         form = Leaves()
     return render(request, 'leaves.html', {'form': form})
 
+def leaves_report(request):
+    leaves= Leaves.objects.all().order_by("startdate")
+    return render(request,"leaves_report.html", {"leaves":leaves},)

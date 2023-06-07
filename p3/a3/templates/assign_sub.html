@@ -10,6 +10,7 @@
     <div class=" min-h-screen bg-slate-200 py-6  sm:py-12">
     <center><span class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 font-bold w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Assign Subject</span></center>
     <div class="border relative px-4 pt-7 pb-8 bg-white shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded-b-md">
+            <a href = "../sub_details" class ="text-blue-400 ml-80 text-xl" >History>></a>
     <form action="" method="post">
         {% csrf_token %}
         <label for="name">Employee Name</label>
@@ -25,7 +26,7 @@
         <input class="border w-full h-10 px-3 mb-5 rounded-md" type="number" name="year" placeholder="Year">
 
         <label for="name">Section</label>
-        <input class="border w-full h-10 px-3 mb-5 rounded-md" type="text" name="section" placeholder="Section">
+        <input class="border w-full h-10 px-3 mb-5 rounded-md" type="number" name="section" placeholder="Section">
 
         <label for="name">Subject</label>
         <input class="border w-full h-10 px-3 mb-5 rounded-md" type="text" name="subject" placeholder="Subject">

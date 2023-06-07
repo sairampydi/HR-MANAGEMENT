@@ -1,6 +1,7 @@
 from django import forms
 from. import models
 from accounts.models import User
+from a3.models import Profile
 
 
 class Leaves(forms.ModelForm):
@@ -11,12 +12,13 @@ class Leaves(forms.ModelForm):
     def save(self):
         name = self.cleaned_data.get('name')
         emp_id = self.cleaned_data.get('emp_id')
+        startdate = self.cleaned_data.get('startdate')
+        lastdate = self.cleaned_data.get('lastdate')
         User.objects.get(username=name,emp_id=emp_id)
         user = super().save()
-        # Check if product with same name and price exists in the database
-        # existing_User = User.objects.filter(username=name, emp_id=emp_id).first()
-        # if not existing_User:
-        #     raise forms.ValidationError('user name and employee id is incorrect')
+
+
+
 class Feedback(forms.ModelForm):
     class Meta:
         model = models.Feedback
@@ -30,11 +32,8 @@ class Feedback(forms.ModelForm):
         print(user.date_created, self.request.user.date_created)
         if user.date_created < self.request.user.date_created:
             raise Exception('you cannot give feedback to seniors')
-        
         super().save()
-            # existing_User = User.objects.filter(username=name, emp_id=emp_id).first()
-            # if not existing_User:
-            #     raise forms.ValidationError('user name and employee id is incorrect')
+         
 
 class Assign_sub(forms.ModelForm):
     class Meta:
@@ -42,25 +41,22 @@ class Assign_sub(forms.ModelForm):
         fields =("name","emp_id","branch","year","section","subject",)
     def save(self):
         name = self.cleaned_data.get('name')
-        emp_id = self.cleaned_data.get('emp_id')
-        User.objects.get(username=name,emp_id=emp_id)
+        branch = self.cleaned_data.get("branch") 
+        year = self.cleaned_data.get("year") 
+        branchs = ["MCA", "EEE", "ECE", "CIVIL", "MECH" ,"CSE","CSD" ,"CSM", "IT" ]
+        bb= branch.upper()
+        if bb not in branchs:
+            raise Exception("Branch not found")     
+        if year > 4 :
+            raise Exception("somthing wrong")   
+        User.objects.get(username=name)
         user = super().save()
-
-class Salary(forms.ModelForm):
-    class Meta:
-        model = models.Salary
-        fields =("username","emp_id","amount",)
-        def save(self):
-            name = self.cleaned_data.get('name')
-            emp_id = self.cleaned_data.get('emp_id')
-            User.objects.get(username=name,emp_id=emp_id)
-            user = super().save()
 
 
 class Profile(forms.ModelForm):
     class Meta:
         model = models.Profile
-        fields =( "username","email","firstname","lastname","emp_id","dob","mobile","address","city","country","postal_code", )
+        fields =( "username","email","firstname","lastname","emp_id","dob","position","mobile","address","city","country","postal_code", )
         def save(self):
             name = self.cleaned_data.get('name')
             User.objects.get(username=name)
@@ -69,7 +65,7 @@ class Profile(forms.ModelForm):
 class Syl_updates(forms.ModelForm):
     class Meta:
         model = models.Syl_updates
-        fields =("name","emp_id","subject","branch","section","startdate","units","current")
+        fields = ("name","emp_id","subject","branch","section","startdate","units","current")
     def save(self):
         name = self.cleaned_data.get('name')
         emp_id = self.cleaned_data.get('emp_id')

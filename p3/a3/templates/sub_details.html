@@ -1,0 +1,34 @@
+{% load static tailwind_tags %}
+
+    <title>{% block title %}Document{% endblock %}</title>
+    
+{% block body %}
+    {% tailwind_css %}
+  <div class="relative  ml-5">
+    <h1 class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 bg-white w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Subject Details</h1>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th class="px-6 py-3">Name</th>
+                <th class="px-6 py-3">Employee Id</th>
+                <th class="px-6 py-3">Branch</th>
+                <th class="px-6 py-3">Year</th>
+                <th class="px-6 py-3">Section</th>
+                <th class="px-6 py-3">Subject</th>
+            </tr>
+        </thead>
+        {% for i in subjects %}
+        <tbody class="">
+        <tr>
+            <td class="px-6 py-3" >{{ i.name }}</td>
+            <td class="px-6 py-3" >{{ i.emp_id }}</td>
+            <td class="px-6 py-3" >{{ i.branch }}</td>
+            <td class="px-6 py-3" >{{ i.year }}</td>
+            <td class="px-6 py-3" >{{ i.section }}</td>
+            <td class="px-6 py-3" >{{ i.subject }}</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -6,8 +6,9 @@
 {% tailwind_css %}
 <div class=" bg-slate-200">
     <div class=" min-h-screen bg-slate-200 py-6  sm:py-12">
-    <center><span class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 font-bold w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">salary credits</span></center>
-    <div class="border relative px-4 pt-7 pb-8 bg-white shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded-b-md">
+    <center><span class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 font-bold w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Salary Credit</span></center>
+<div class="border relative px-4 pt-7 pb-8 bg-white shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded-b-md">
+        <a href = "../sal_details" class ="text-blue-400 ml-80 text-xl" >History>></a>
     <form action="" method="post">
         {% csrf_token %}
         <label for="name">Employee Name</label>
@@ -18,6 +19,7 @@
         <input class="border w-full h-10 px-3 mb-5 rounded-md" type="text" name="amount" required placeholder="amount">
         <input class="ml-24 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-16 py-3 rounded" type="submit" name="submit" value="credit">
     </form>
+
     </div>
     </div>
 </div>

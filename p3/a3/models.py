@@ -87,6 +87,13 @@ class Profile(models.Model):
     firstname = models.CharField(max_length=20)
     lastname = models.CharField(max_length=20)
     emp_id = models.IntegerField(default=123)
+    options = (
+        ('dean', 'Dean'),
+        ('HOD', 'HOD'),
+        ('professor', 'Professor'),
+        ('assistant professor', 'Assistant Professor'),
+    )
+    position = models.CharField(max_length=100, choices=options, default= "None")
     dob = models.DateField(blank=True, null=True)
     mobile = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=50)
@@ -102,7 +109,7 @@ class Assign_sub(models.Model):
     emp_id = models.IntegerField(default= 1)
     branch = models.CharField(max_length=30)
     year = models.IntegerField(default= 1)
-    section = models.CharField(max_length=30)
+    section = models.IntegerField(default=0)
     subject = models.CharField(max_length=30)
 
     def __str__(self):
