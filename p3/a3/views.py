@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from .models import Leaves , Salary , Profile , Assign_sub , Feedback , Syl_updates
 from django.http import HttpResponse
+from django.core.mail import send_mail
 from.import forms
 from accounts.models import User
 from django.urls import reverse
@@ -13,6 +14,9 @@ def home(request):
 def hr_home(request):
     return render(request,"hr_home.html")
 
+def hod_home(request):
+    return render(request,"hod_home.html")
+
 def emp_home(request):
         return render(request,"emp_home.html")
 
@@ -23,7 +27,7 @@ def nav_bar(request):
     return render(request,"nav_bar.html")
 
 def feedback(request):
-    employee = Profile.objects.all().order_by("pk")
+    employee = User.objects.all().order_by("pk")
     return render(request,"feedback.html",{"employee":employee})
 
 def feedbackform(request):
@@ -47,7 +51,13 @@ def feedbackform(request):
 
 def delete_view(request,id):
     user = User.objects.get(pk=id)
+    email = User.objects.get("email")
     user.delete()
+    subject = 'FROM HR MANAGEMENT'
+    message = 'YOUR REQUEST IS REJECTED PLEASE CONTACT ADMINISTRATION'
+    from_email = 'gvpcehr123@gmail.com'
+    recipient_list = [email]
+    send_mail(subject, message, from_email, recipient_list)
     return redirect(reverse("a3:update_employees"))
 
 def delete_v(request,id):
@@ -57,17 +67,40 @@ def delete_v(request,id):
 
 def delete_z(request,id):
     user = Leaves.objects.get(pk=id)
+    email = user.email
     user.delete()
+    subject = 'ABOUT LEAVES'
+    message = 'YOUR LEAVE REQUEST IS REJECTED'
+    from_email = 'gvpcehr123@gmail.com'
+    recipient_list = [email]
+    send_mail(subject, message, from_email, recipient_list)
     return redirect(reverse("a3:leaves_report"))
 
 def accept_view(request,id):
     user = User.objects.get(pk = id)
     # user.delete().
     user.is_active = True
+    email = user.email 
     user.save()
     #send mails
-    mail_subject = "HR accepted your request"
-    mail_temp = "email/accept.html"
+    subject = 'FROM HR MANAGEMENT'
+    message = 'YOU ARE VERIFIED BY HR PLEASE LOGIN KNOW'
+    from_email = 'gvpcehr123@gmail.com'
+    recipient_list = [email]
+    send_mail(subject, message, from_email, recipient_list)
+    return redirect(reverse("a3:update_employees"))
+
+def accept_leaves(request,id):
+    user = Leaves.objects.get(pk = id)
+    user.delete()
+    email = user.email 
+    user.save()
+    #send mails
+    subject = 'FROM HR MANAGEMENT'
+    message = 'YOUR LEAVE REQUEST IS ACCEPTED'
+    from_email = 'gvpcehr123@gmail.com'
+    recipient_list = [email]
+    send_mail(subject, message, from_email, recipient_list)
     return redirect(reverse("a3:update_employees"))
 
 def assign_sub(request):
@@ -95,6 +128,14 @@ def emp_profile(request):
         "profile" : profile
     }
     return render(request,"emp_profile.html",context)
+
+def hod_profile(request):
+    username = request.user.username
+    profile = Profile.objects.filter(username = username).first()
+    context={
+        "profile" : profile
+    }
+    return render(request,"hod_profile.html",context)
 
 def emp_nav(request):
     return render(request,"emp_nav.html")

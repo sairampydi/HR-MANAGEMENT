@@ -4,14 +4,13 @@
 
 {% block body %} 
    {% tailwind_css %}
-    <h1> welcome to gvp</h1>
   <div class="relative overflow-x-auto ml-5">
     <h1 class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 bg-white w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Recent Employees</h1>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th class="px-6 py-3">employee id</th>
-                <th class="px-6 py-3">fullname</th>
+                <th class="px-6 py-3">Username</th>
+                <th class="px-6 py-3">Email</th>
                 <th class="px-6 py-3">Branch</th>
                 <th class="px-6 py-3">Date</th>
             </tr>
@@ -19,8 +18,8 @@
         {% for i in update_employee %}
         <tbody class="">
         <tr>
-            <td class="px-6 py-3" >{{ i.pk }}</td>
             <td class="px-6 py-3" >{{ i.username }}</td>
+            <td class="px-6 py-3" >{{ i.email }}</td>
             <td class="px-6 py-3" >{{ i.branch }}</td>
             <td class="px-6 py-3" >{{ i.date_created }}</td>
             <td><a href="../{{i.id}}/accept"><button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-6 py-2 rounded">Accept</button></a></td>

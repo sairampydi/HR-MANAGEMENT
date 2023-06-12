@@ -6,7 +6,8 @@
     {% tailwind_css %}
   <div class="relative  ml-5">
     <h1 class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 bg-white w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Subject Details</h1>
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <input type="text" id="Input" value="" placeholder="Enter your search" oninput ="searchtable()">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id = "table">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th class="px-6 py-3">Name</th>
@@ -31,4 +32,30 @@
         {% endfor %}
     </table>
 </div>
+
+<script>
+  function searchtable() {
+    var input = document.getElementById("Input");
+    var filter = input.value.toLowerCase();
+    var table = document.getElementById("table");
+    var rows = table.getElementsByTagName("tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].getElementsByTagName("td");
+      var found = false;
+
+      for (var j = 0; j < cells.length; j++) {
+        var cellText = cells[j].textContent || cells[j].innerText;
+
+        if (cellText.toLowerCase().indexOf(filter) > -1) {
+          found = true;
+          break;
+        }
+      }
+
+      rows[i].style.display = found ? "" : "none";
+    }
+  }
+</script>
+
 {% endblock %}

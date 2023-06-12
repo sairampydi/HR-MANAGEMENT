@@ -1,4 +1,4 @@
-{% extends "hr_nav.html" %}
+{% extends "hod_nav.html" %}
 {% load static tailwind_tags %}
     <title>{% block title %}Document{% endblock %}</title>
 
@@ -7,7 +7,7 @@
 
   <div class="relative overflow-x-auto ml-5">
     <h1 class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 bg-white w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Syllabus Updates</h1>
-        <input type="text" id="Input" value="" placeholder="Enter your search" onkeyup ="searchfun()">
+        <input type="text" id="Input" value="" placeholder="Enter your search" oninput ="searchtable()">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400"  id="table">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -41,26 +41,28 @@
 </div>
 
 <script>
-    const searchfun = () => {
-        let element = document.getElementById("Input").value.toUpperCase();
-        let table = document.getElementById("table");
-        let tr = table.getElementsByTagName("tr");
-        for (let i = 0; i < tr.length; i++) {
-            let tds = tr[i].getElementsByTagName("td");
-            console.log(tds)
-            for (let j = 0;j<tds.length;j++){
-                let td = tds[j]
-                console.log(td)
-                if (td) {
-                    let text = td.textContent || td.innerText;
-                    if (text.toUpperCase().indexOf(element) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
+  function searchtable() {
+    var input = document.getElementById("Input");
+    var filter = input.value.toLowerCase();
+    var table = document.getElementById("table");
+    var rows = table.getElementsByTagName("tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].getElementsByTagName("td");
+      var found = false;
+
+      for (var j = 0; j < cells.length; j++) {
+        var cellText = cells[j].textContent || cells[j].innerText;
+
+        if (cellText.toLowerCase().indexOf(filter) > -1) {
+          found = true;
+          break;
         }
+      }
+
+      rows[i].style.display = found ? "" : "none";
     }
+  }
 </script>
+
 {% endblock %}

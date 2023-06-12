@@ -1,4 +1,4 @@
-{% extends "hr_nav.html" %}
+{% extends "hod_nav.html" %}
 {% load static tailwind_tags %}
 
     <title>{% block title %}Document{% endblock %}</title>
@@ -27,7 +27,7 @@
             <td class="px-6 py-3" >{{ i.startdate }}</td>
             <td class="px-6 py-3" >{{ i.lastdate }}</td>
             <td class="px-6 py-3" >{{ i.enterreason }}</td>
-            <td><a href="../{{i.id}}/accept"><button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-6 py-2 rounded">Accept</button></a></td>
+            <td><a href="../{{i.id}}/accept_l"><button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-6 py-2 rounded">Accept</button></a></td>
             <td><a href="../{{i.id}}/delete_z"><button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-6 py-2 rounded">Reject</button></a></td>
         </tr>
         </tbody>

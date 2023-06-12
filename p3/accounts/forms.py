@@ -10,9 +10,10 @@ class Userform(UserCreationForm):
         ('hod', 'Hod'),
         ('employee', 'Employee'),
         ))
+    email = forms.EmailField()
     class Meta :
         model= User
-        fields = UserCreationForm.Meta.fields + ('stream','position')
+        fields = UserCreationForm.Meta.fields + ('stream','position','email')
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_active = False

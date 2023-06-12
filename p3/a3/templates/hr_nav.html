@@ -29,7 +29,7 @@
     <div class="container mx-auto px-4">
       <div class="flex items-center justify-between py-4">
         <div>
-          <a href="#" class="text-white text-xl font-bold">Gayatri Vidya Parishad</a>
+          <a href="#" class="text-white text-xl font-bold">Gayatri Vidya Parishad Collage of Engineering(A)</a>
         </div>
         <div class="hidden md:block">
           <ul class="flex space-x-4">
@@ -43,17 +43,6 @@
               <a href="../employees" class="text-white hover:text-gray-300">Employees</a>
             </li>
             <li>
-              <a href="../assign_sub " class="text-white hover:text-gray-300">Assign Subject </a>
-            </li>
-            <li>
-              <a href="../syllabus " class="text-white hover:text-gray-300">Syllabus Updates</a>
-            </li>
-            <li>
-              <a href="../add_salary " class="text-white hover:text-gray-300">add Salary</a>
-            </li>
-            <li>
-              <a href="../leaves_report" class="text-white hover:text-gray-300">leave report</a>
-            </li>
             <form class="logout-link"   action="{% url 'accounts:logout' %}" method = "post">
             {% csrf_token %}
             <button class="mr-10 hover:text-yellow-400 text-white" type="submit">logout</button> 

@@ -48,13 +48,13 @@ INSTALLED_APPS = [
     'accounts',
 ]
 
-
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = int(587)
-EMAIL_HOST_USER = "sairampydi1999@gmail.com"
-EMAIL_HOST_PASSWORD = "Ram@123123"
+EMAIL_HOST_USER = "pydisairam99@gmail.com"
+EMAIL_HOST_PASSWORD = "gufkfcnmhflrisjq"
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'HR department<sairampydi1999@gmail.com>'
+DEFAULT_FROM_EMAIL = 'HR department<pydisairam99@gmail.com>'
 
 
 MIDDLEWARE = [

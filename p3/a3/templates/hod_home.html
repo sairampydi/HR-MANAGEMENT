@@ -1,0 +1,10 @@
+{% extends "hod_nav.html" %}
+{% load static tailwind_tags %}
+    <title>{% block title %}Document{% endblock %}</title>
+{% block body%}
+     <script src="https://cdn.tailwindcss.com"></script>
+{% tailwind_css %}
+    <img src ="{% static 'gvpce2.jpg' %}" class="w-full">
+
+{% include "footer.html"%}
+{% endblock%}

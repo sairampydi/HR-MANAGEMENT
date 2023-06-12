@@ -1,59 +1,64 @@
-{% extends "emp_nav.html" %}
+{% extends "hod_nav.html" %}
 {% load static tailwind_tags %}
     <title>{% block title %}Document{% endblock %}</title>
-
 {% block body %} 
    {% tailwind_css %}
   <div class="relative  ml-5">
     <h1 class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 bg-white w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">FeedBack</h1>
-        <input type="text" id="Input" placeholder="Enter your search" onkeyup ="searchfun()">
+        <input type="text" id="Input" placeholder="Enter your search" oninput ="searchtable()">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th class="px-6 py-3">Employee id</th>
                     <th class="px-6 py-3">Full Name</th>
                     <th class="px-6 py-3">Email Id</th>
-                    <th class="px-6 py-3">Date Of Birth</th>
-                    <th class="px-6 py-3">Mobile Number</th>
-                    <th class="px-6 py-3">Country</th>
+                    <th class="px-6 py-3">Position</th>
+                    <th class="px-6 py-3">Stream</th>
                 </tr>
             </thead>
         {% for i in employee %}
+        
         <tbody class="" id="table">
+        {% if i.position == "none" or i.position == "employee" %}
         <tr>
-            <td class="px-6 py-3" >{{ i.emp_id }}</td>
+            <td class="px-6 py-3" >{{ i.pk }}</td>
             <td class="px-6 py-3" >{{ i.username }}</td>
             <td class="px-6 py-3" >{{ i.email }}</td>
-            <td class="px-6 py-3" >{{ i.dob }}</td>
-            <td class="px-6 py-3" >{{ i.mobile }}</td>
-            <td class="px-6 py-3" >{{ i.country }}</td>
-            <td><a href="../feedbackform"><button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-6 py-2 rounded">give feedback</button></a></td>
+            <td class="px-6 py-3" >{{ i.position }}</td>
+            <td class="px-6 py-3" >{{ i.stream }}</td>
+            <td><a href="../feedbackform"><button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-6 py-2 rounded">Give Feedback</button></a></td>
 
         </tr>
+        {%endif%}
         </tbody>
         {% endfor %}
     </table>    
 </div>
 
+<script>
+  function searchtable() {
+    var input = document.getElementById("Input");
+    var filter = input.value.toLowerCase();
+    var table = document.getElementById("table");
+    var rows = table.getElementsByTagName("tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].getElementsByTagName("td");
+      var found = false;
+
+      for (var j = 0; j < cells.length; j++) {
+        var cellText = cells[j].textContent || cells[j].innerText;
+
+        if (cellText.toLowerCase().indexOf(filter) > -1) {
+          found = true;
+          break;
+        }
+      }
+
+      rows[i].style.display = found ? "" : "none";
+    }
+  }
+</script>
+
 {% endblock %}
 
-{% block script %}
-<script>
-    const searchfun = () => {
-        let element = document.getElementById("Input").value.toUpperCase();
-        let table = document.getElementById("table");
-        let tr = table.getElementsByTagName("tr");
-        for (let i = 0; i < tr.length; i++) {
-            let td = tr[i].getElementsByTagName("td")[0];
-            if (td) {
-                let text = td.textContent || td.innerHTML;
-                if (text.toUpperCase().indexOf(element) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }   
-            }
-        }
-    }
-</script>
-{% endblock %}

@@ -2,12 +2,13 @@ from django import forms
 from. import models
 from accounts.models import User
 from a3.models import Profile
+from django.contrib import messages
 
 
 class Leaves(forms.ModelForm):
     class Meta:
         model = models.Leaves
-        fields =( "name","startdate","lastdate","enterreason", "reason", )
+        fields =( "name","email","startdate","lastdate","enterreason", "reason", )
     
     def save(self):
         name = self.cleaned_data.get('name')
@@ -46,9 +47,10 @@ class Assign_sub(forms.ModelForm):
         branchs = ["MCA", "EEE", "ECE", "CIVIL", "MECH" ,"CSE","CSD" ,"CSM", "IT" ]
         bb= branch.upper()
         if bb not in branchs:
-            raise Exception("Branch not found")     
+            messages.success("please select correct branch")
+ 
         if year > 4 :
-            raise Exception("somthing wrong")   
+            messages.success("please enter ")  
         User.objects.get(username=name)
         user = super().save()
 
@@ -56,11 +58,14 @@ class Assign_sub(forms.ModelForm):
 class Profile(forms.ModelForm):
     class Meta:
         model = models.Profile
-        fields =( "username","email","firstname","lastname","emp_id","dob","position","mobile","address","city","country","postal_code", )
+        fields =( "username","email","firstname","lastname","emp_id","dob","mobile","address","city","country","postal_code", )
         def save(self):
             name = self.cleaned_data.get('name')
-            User.objects.get(username=name)
+            email = self.cleaned_data.get('name')
+            User.objects.get(username=name,email = email)
             user = super().save()
+            
+
 
 class Syl_updates(forms.ModelForm):
     class Meta:
@@ -69,5 +74,10 @@ class Syl_updates(forms.ModelForm):
     def save(self):
         name = self.cleaned_data.get('name')
         emp_id = self.cleaned_data.get('emp_id')
+        branch = self.cleaned_data.get('branch')
+        branchs = ['MCA','CSE','MECH','CIVIL','CSD','CSM','IT','EEE','ECE']
+        bb = branch.upper()
+        if bb not in branchs:
+            raise Exception('branch not found')
         User.objects.get(username=name,emp_id = emp_id)
         user = super().save()

@@ -1,56 +1,73 @@
+
+{% load static tailwind_tags %}
 <html lang="en">
 <head>
    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% tailwind_css %}
 </head>
-<style>
-body {
-    background: #6753;
-    margin-top :10%;
-}
-h1{
-  background: #
-  {% comment %} margin-left: 30%; {% endcomment %}
-}
-label {
-    display: block;
-    margin-bottom: 5px;
-    margin-top: 10px;
-}
-input[type="submit"]{
-  display: block;
-  background: #98E;
-  margin-top: 10px;
-}
-{% comment %} form {
-    margin-left: 30%;
-} {% endcomment %}
-{% comment %} a {
-    background: #98E;
-    border-style: solid;
-    padding: 3px;
-    color : black;
-    margin
-} {% endcomment %}
-.login {
-    background: white;
-    margin-left : 40%;
-    margin-right : 40%;
-    padding: 10px;
-}
-</style>
-<body>
-<div class = login>
-    <h1>login</h1><hr>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <!-- <input type="text" name="name" id="name" placeholder="name">
-        <input type="password" name="password" id="" placeholder="password"> -->
-        <input type="submit" name="" value="login" id="">
-        <a href ="../signup/">don't have an account? Sign Up<a>
-    </form>
-  </div>
-  
+<body class="bg-gray-900">
 
-</body>
+    <div class="flex justify-center items-center">
+      <div
+        class="relative h-[80vh] w-[80vw] m-auto bg-gradient-to-r from-[#2C5364] to- [#203A43] to-[#0F2027] max-[600px]:bg-sky-300 rounded-xl flex max-md:flex">
+
+        <div
+          class="bg-black bg-opacity-25 w-fit h-fit m-auto p-5 rounded-lg relative"
+        >
+          <form action="" method="post" name="frm">
+            {% csrf_token %} {% for field in form %}
+            <div class="grid grid-cols-2">
+              <div class="text-xl mt-2 text-white font-thin">
+                {{field.label}}
+              </div>
+              <div class="mt-2">{{field}}</div>
+            </div>
+            {%endfor%}
+            <div class="inline-block">
+              <input
+                type="reset"
+                name="reset"
+                id=""
+                value="Reset"
+                class="mt-3 font-thin text-xl ml-2 text-gray-200 cursor-pointer hover:rounded-3xl p-1.5 m-auto hover:bg-blue-700 duration-1000"/>
+              <input
+                type="submit"
+                name="submit"
+                value="Login"
+                class="mt-3 font-thin text-xl ml-9 text-gray-200 cursor-pointer hover:rounded-3xl p-1.5 m-auto hover:bg-green-700 duration-1000"/>
+            </div>
+            <div class="grid grid-cols-2 mt-3">
+              <div class="text-gray-400 ml-3 font-thin">
+                Didn't have an account?
+              </div>
+              <a href="../signup" target="_self"
+                ><input
+                  type="button"
+                  name="signup"
+                  id=""
+                  value="Sign-Up"
+                  class="font-thin cursor-pointer text-gray-200 text-lg hover:bg-green-700 duration-1000 hover:rounded-3xl p-1.5 m-auto"/></a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div align="center">
+      {% for i in messages%}
+      <script>
+        {% comment %} alert("{{i}}"); {% endcomment %}
+      </script>
+      {% endfor %}
+    </div>
+  </body>
+  <script>
+    var form_fields = document.getElementsByTagName("input");
+    form_fields[1].placeholder = "Email..";
+    form_fields[2].placeholder = "Password..";
+    for (var field in form_fields) {
+      form_fields[field].className += " form-control";
+    }
+  </script>
 </html>

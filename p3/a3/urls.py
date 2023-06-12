@@ -20,10 +20,12 @@ urlpatterns = [
     path("employees/",views.employees,name="employees"),
     path("hr_home/",views.hr_home,name="hr_home"),
     path("emp_home/",views.emp_home,name="emp_home"),
+    path("hod_home/",views.hod_home,name="hod_home"),
     path("hr_nav/",views.hr_nav,name="hr_nav"),
     path("profile/",views.profile,name="profile"),
     path("syllabus/",views.syllabus,name="syllabus"),
     path("emp_profile/",views.emp_profile,name="emp_profile"),
+    path("hod_profile/",views.hod_profile,name="hod_profile"),
     path("feedback/",views.feedback,name="feedback"),
     path("feedbackform/",views.feedbackform,name="feedbackfrom"),
     path("assign_sub/", views.assign_sub , name="assign_sub"),
@@ -34,6 +36,7 @@ urlpatterns = [
     path("<int:id>/delete_v/",views.delete_v,name="delete_v"),
     path("<int:id>/delete_z/",views.delete_z,name="delete_z"),
     path("<int:id>/accept/",views.accept_view,name="accept"),
+    path("<int:id>/accept_l/",views.accept_leaves,name="accept_l"),
 
     # path("",views.home,name="leaves.html")
 ]

@@ -1,10 +1,8 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-from calendar import monthrange
-from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate,login,logout
@@ -13,7 +11,6 @@ from accounts.models import User
 from django.views.decorators.cache import never_cache
 from accounts.forms import Userform
 import random
-from a3.models import Profile
 from django.urls import reverse
 # Create your views here.
 s = set()
@@ -21,7 +18,6 @@ def signup_views(request):
     if request.method == 'POST':
         form = Userform(request.POST)
         print(form.errors)
-        
         if form.is_valid():
             print("signed up")
             while True:
@@ -56,7 +52,7 @@ def hr_login(request):
         if not u or u.employee_status != "hr":
             print("not HR")
             messages.success(request,"Incorrect Username or Password")
-            return HttpResponse("your username or password is worng try again")
+            return redirect("accounts:hr_login")
         user=authenticate(username=username,password=password)
         if user is not None:
             print("success")
@@ -80,12 +76,9 @@ def user_login(request):
         username=request.POST['username']
         password=request.POST['password']
         u = User.objects.filter(username=username).first()
-        # if u.is_accept == False:
-        #     messages.error("please contact HR department")
-        #     return redirect('user_login')
-        if not u or u.employee_status != "employee":
+        if not u or u.employee_status != "employee"or u.position != "employee":
             messages.success(request,"Incorrect Username or Password")
-            return HttpResponse("your username or password is worng try again")
+            return redirect("accounts:user_login")
         if not u.is_active:
             return HttpResponse("your user is not yet accepted please contact administration")
         user=authenticate(username=username,password=password)
@@ -97,6 +90,30 @@ def user_login(request):
     else:
         form = AuthenticationForm()
     return render(request,'user_login.html',{'form':form})
+
+
+def hod_login(request):
+    #user.objects.filter(employee_status = "employee")
+    if request.user.is_authenticated:
+        return redirect("a3:hod_home")  
+    if request.method == 'POST' :
+        username=request.POST['username']
+        password=request.POST['password']
+        u = User.objects.filter(username=username).first()
+        if not u or u.employee_status != "employee" or u.position != "hod":
+            messages.success(request,"Incorrect Username or Password")
+            return redirect("accounts:hod_login")
+        if not u.is_active:
+            return HttpResponse("your user is not yet accepted please contact administration")
+        user=authenticate(username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect("a3:hod_home")
+        else:
+            return HttpResponse("your username or password is worng try again")
+    else:
+        form = AuthenticationForm()
+    return render(request,'hod_login.html',{'form':form})
 
 
 

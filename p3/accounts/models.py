@@ -16,10 +16,11 @@ class User(AbstractUser):
         ('hod', 'Hod'),
         ('employee', 'Employee'),
     )
+    email = models.EmailField()
     position = models.CharField(max_length=30,default="none",choices= position_options)
     employee_id = models.CharField( max_length=5, default=2110, primary_key =True),
     date_created = models.DateField(default=datetime.now)
-    branch = models.CharField(max_length=20,default = "none")
+    stream = models.CharField(max_length=20,default = "none")
 
 
 
