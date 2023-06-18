@@ -21,15 +21,11 @@
               <a href="../syl_updates" class="text-white hover:text-gray-300">Syllabus Updates</a>
             </li>
             <li>
-              <a href="../salary_updates" class="text-white hover:text-gray-300">Salary Updates </a>
-            </li>
-            <li>
-              <a href="../leaves" class="text-white hover:text-gray-300">Apply leave  </a>
+              <a href="../leaves" class="text-white hover:text-gray-300"> Apply leave </a>
             </li>
             <li>
               <a href=" ../emp_profile" class="text-white hover:text-gray-300"> Profile </a>
             </li>
-           
             <form class="logout-link"   action="{% url 'accounts:logout' %}" method = "post">
             {% csrf_token %}
             <button class="hover:text-yellow-400 text-white" type="submit">logout</button> 

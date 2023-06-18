@@ -82,18 +82,23 @@ class Salary(models.Model):
     def __str__(self):
         return self.username
 
-class Profile(models.Model):
+class Profile(models.Model): 
+    image = models.ImageField(upload_to="account/images", default="",)
     username= models.CharField(max_length=20)
+    surname= models.CharField(max_length=20)
     email = models.EmailField()
-    firstname = models.CharField(max_length=20)
-    lastname = models.CharField(max_length=20)
     emp_id = models.IntegerField(default=123)
     dob = models.DateField(blank=True, null=True)
     mobile = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=50)
     city= models.CharField(max_length=30)
     country = models.CharField(max_length=30) 
+    state= models.CharField(max_length=30 , default="btech") 
+    education = models.CharField(max_length=30,default="btech") 
+    experience = models.CharField(max_length=30,default="none" ) 
+    details = models.CharField(max_length=30, default="none") 
     postal_code = models.IntegerField(default=12345) 
+   
 
     def __str__(self):
         return self.username 
@@ -105,6 +110,7 @@ class Assign_sub(models.Model):
     year = models.IntegerField(default= 1)
     section = models.IntegerField(default=0)
     subject = models.CharField(max_length=30)
+    date = models.DateTimeField( default= datetime.now)
 
     def __str__(self):
         return self.name

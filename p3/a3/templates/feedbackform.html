@@ -1,7 +1,9 @@
-{% extends "emp_nav.html" %} 
+{% extends "hod_nav.html" %} 
+{% include "alert.html" %}
 {% load static tailwind_tags %}    
    <!-- {%block css %}<script src="https://cdn.tailwindcss.com"></script>{% endblock %} -->
     <title>{% block title %}leaves{% endblock %}</title>
+
     {% block body %}
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     {% tailwind_css %}
@@ -13,7 +15,7 @@
             {% csrf_token %} 
             <!-- {{ forms }} -->
             <label for="name">Full Name</label>
-            <input  class="border w-full h-10 px-3 mb-5 rounded-md" type="text" required name="name" placeholder="" id="">
+            <input  class="border w-full h-10 px-3 mb-5 rounded-md" type="text" id="error-container" required name="name" placeholder="" id="">
             <label for="Communication Skills:">Communication Skills:</label>
             <select required name="CommunicationSkills" class="border w-full h-10 px-3 mb-5 rounded-md" id="leave" >
                 <option value="excellent">excellent</option>
@@ -71,4 +73,5 @@
 
         </form>
     
+
 {%endblock %}

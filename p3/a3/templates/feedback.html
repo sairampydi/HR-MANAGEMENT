@@ -17,9 +17,10 @@
                 </tr>
             </thead>
         {% for i in employee %}
-        
+
         <tbody class="" id="table">
         {% if i.position == "none" or i.position == "employee" %}
+        {% if i.stream == user_stream %}
         <tr>
             <td class="px-6 py-3" >{{ i.pk }}</td>
             <td class="px-6 py-3" >{{ i.username }}</td>
@@ -27,7 +28,7 @@
             <td class="px-6 py-3" >{{ i.position }}</td>
             <td class="px-6 py-3" >{{ i.stream }}</td>
             <td><a href="../feedbackform"><button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-6 py-2 rounded">Give Feedback</button></a></td>
-
+        {% endif %}
         </tr>
         {%endif%}
         </tbody>

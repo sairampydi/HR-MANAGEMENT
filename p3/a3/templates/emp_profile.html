@@ -1,45 +1,54 @@
-{% extends "emp_nav.html"  %}
-{% load static tailwind_tags  %}
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% if position == "hod" %}
+    {% include "hod_nav.html" %}
+{% else %}
+    {% include "emp_nav.html" %}
+{% endif %}
     <title>Document</title>
-    
-{% block body %}
-{% tailwind_css %}
-<script src="https://cdn.tailwindcss.com"></script>
-    <div class=" bg-white max-w-xl mx-auto sm:px-10 p-4 mt-3 border-2 border-black">
-    <h1 class="text-5xl text-yellow-800 border-b-4 mb-4 border-black">Profile</h1> 
-    <div class="container mx-auto flex">
-        <div class="grid grid-cols-1 mb-3 ">
-            <div class="bg-gray-200 py-4 px-12 m-2">Name</div>
-            <div class="bg-gray-200 py-4 px-12 m-2">Email</div>
-            <div class="bg-gray-200 py-4 px-12 m-2">First Name</div>
-            <div class="bg-gray-200 py-4 px-12 m-2">Last name</div>
-            <div class="bg-gray-200 py-4 px-12 m-2">Empoloyee Id</div>
-            <div class="bg-gray-200 py-4 px-12 m-2">Date of Birth</div>
-            <div class="bg-gray-200 py-4 px-14 m-2">PhoneNumber</div>
-            <div class="bg-gray-200 py-4 px-12 m-2">Address</div>
-            <div class="bg-gray-200 py-4 px-12 m-2">City</div>
-            <div class="bg-gray-200 py-4 px-12 m-2">Country</div>
-            <div class="bg-gray-200 py-4 px-12 m-2">Postal Code</div>
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="">
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src= "{{ profile.image.url }}"><span class="font-weight-bold">{{profile.username}}</span><span class="text-black-50">{{profile.email}}</span><span> </span></div>
         </div>
-        <div class="grid grid-cols-1 mb-3">
-            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.username }}</div>
-            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.email }}</div>
-            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.firstname }}</div>
-            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.lastname }}</div>  
-            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.emp_id }}</div>  
-            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.dob }}</div>  
-            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.mobile }}</div>  
-            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.address }}</div>  
-            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.city }}</div>  
-            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.country }}</div>  
-            <div class="bg-gray-200 py-4 px-12 m-2">{{ profile.postal_code }}</div>  
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+           <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Name</label><p class="form-control" >{{profile.username}}</p></div>
+                    <div class="col-md-6"><label class="labels">Surname</label><p class="form-control" >{{profile.surname}}</p></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><p class="form-control" >{{profile.mobile}}</div>
+                    <div class="col-md-12"><label class="labels">Address Line 1</label><p class="form-control">{{profile.address}}</div>
+                    <div class="col-md-12"><label class="labels">Postcode</label><p class="form-control">{{profile.postal_code}}</div>
+                    <div class="col-md-12"><label class="labels">City</label><p class="form-control" >{{profile.city}}</div>
+                    <div class="col-md-12"><label class="labels">Email ID</label><p class="form-control" >{{profile.email}}</div>
+                    <div class="col-md-12"><label class="labels">Education</label><p class="form-control">{{profile.education}}</div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">Country</label><p class="form-control" >{{profile.country}}</div>
+                    <div class="col-md-6"><label class="labels">State/Region</label><p class="form-control" >{{profile.state}}</div>
+                </div>
+                <div class="mt-5 text-center"><a href= "" class="btn btn-primary profile-button" type="button">Edit Profile</a></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>
+                <div class="col-md-12"><label class="labels">Experience in Designing</label><p class="form-control" >{{profile.experience}}</div> <br>
+                <div class="col-md-12"><label class="labels">Additional Details</label><p class="form-control" >{{profile.details}}</div>
+            </div>
         </div>
     </div>
-    <a href = "../profile" class = "ml-32  bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-16 py-3 rounded">Updates<a>
-    </div>
+</div>
+</div>
+</div>
   
 
 {% endblock %}

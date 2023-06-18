@@ -5,21 +5,56 @@
 {% tailwind_css %}
 <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> 
 
-    <center><div class="border text-4xl text-yellow-800 px-6 pt-10 pb-8  w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">This is Subject Updates</div></center>
-    <div class="border relative px-4 pt-7 pb-8 bg-white shadow-xl w-1/2 max-w-md mx-auto sm:px-10 rounded-b-md flex">
-        <div id="main" class="grid grid-rows-4 grid-flow-col gap-8 justify-center">
-            <div class=" w-26  h-12">BRANCH</div> 
-            <div class=" w-26 h-12">YEAR</div>
-            <div class=" w-26 h-12">SECTION</div>
-            <div class=" w-26 h-12">SUBJECT</div>
-            <div class=" w-26  h-12">:</div> 
-            <div class=" w-26 h-12">:</div>
-            <div class=" w-26 h-12">:</div>
-            <div class=" w-26 h-12">:</div>
-            <div class=" w-26 h-12"> {{ subject.branch }} </div>
-            <div class=" w-26 h-12"> {{ subject.year }} </div>
-            <div class=" w-26 h-12"> {{ subject.section }} </div>
-            <div class=" w-26 h-12"> {{ subject.subject }} </div>
-        </div>
-        </div>   
-{% endblock %} 
+  <div class="relative overflow-x-auto ml-5">
+    <h1 class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 bg-white w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Employees</h1>
+        <input type="text" id="Input" value="" placeholder="Enter your search" oninput ="searchtable()">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400"  id="table">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th class="px-6 py-3">Branch</th>
+                    <th class="px-6 py-3">Year</th>
+                    <th class="px-6 py-3">Section</th>
+                    <th class="px-6 py-3">Subject</th>
+                    <th class="px-6 py-3">Date</th>
+                </tr>
+            </thead>
+        {% for i in subject %}
+        <tbody class="">
+        <tr>
+            <td class="px-6 py-3" >{{ i.branch }}</td>
+            <td class="px-6 py-3" >{{ i.year }}</td>
+            <td class="px-6 py-3" >{{ i.section }}</td>
+            <td class="px-6 py-3" >{{ i.subject }}</td>
+            <td class="px-6 py-3" >{{ i.date }}</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>    
+</div>
+
+<script>
+  function searchtable() {
+    var input = document.getElementById("Input");
+    var filter = input.value.toLowerCase();
+    var table = document.getElementById("table");
+    var rows = table.getElementsByTagName("tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].getElementsByTagName("td");
+      var found = false;
+
+      for (var j = 0; j < cells.length; j++) {
+        var cellText = cells[j].textContent || cells[j].innerText;
+
+        if (cellText.toLowerCase().indexOf(filter) > -1) {
+          found = true;
+          break;
+        }
+      }
+
+      rows[i].style.display = found ? "" : "none";
+    }
+  }
+</script>
+
+{% endblock %}

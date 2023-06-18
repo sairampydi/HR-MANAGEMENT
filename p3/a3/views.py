@@ -26,9 +26,18 @@ def hr_nav(request):
 def nav_bar(request):
     return render(request,"nav_bar.html")
 
+def alert(request):
+    return redirect("a3:feedbackform")
+
 def feedback(request):
+    user_stream = request.user.stream 
+    
     employee = User.objects.all().order_by("pk")
-    return render(request,"feedback.html",{"employee":employee})
+    context ={
+        "employee":employee,
+        "user_stream" :user_stream
+              }
+    return render(request,"feedback.html",context)
 
 def feedbackform(request):
     if request.method == "POST":
@@ -39,7 +48,8 @@ def feedbackform(request):
             try:
                 form.save()
             except Exception as e:
-                return HttpResponse(e)
+                context = {'exception_message': str(e)}
+                return HttpResponse(render(request, 'alert.html', context))
             return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../emp_home'><button>Goto Home</button></a>")
         else:
             form = forms.Feedback()
@@ -111,7 +121,7 @@ def assign_sub(request):
             try:
                 form.save()
                 return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../hr_home'><button>Goto Home</button></a>")
-            except Exception:
+            except Exception as e:
                 return HttpResponse('<body style="background-color: #f8f8f8;  color: #333;  border: 2px solid #ccc;  padding: 20px;  border-radius: 6px;  text-align: center;  max-width: 400px;  margin: 0 auto; font-size: 40px;  display: block;  margin-bottom: 20px;}">Oops, something went wrong</body>')
         else:
             form = forms.Assign_sub()
@@ -123,9 +133,11 @@ def assign_sub(request):
 
 def emp_profile(request):
     username = request.user.username
+    position = request.user.position
     profile = Profile.objects.filter(username = username).first()
     context={
-        "profile" : profile
+        "profile" : profile,
+        "position":position
     }
     return render(request,"emp_profile.html",context)
 
@@ -143,18 +155,21 @@ def emp_nav(request):
 def profile(request):
     if request.method == "POST":
         print("auth")
-        form = forms.Profile( request.POST,)
+        form = forms.Profile( request.POST,request.FILES)
+        print(form.errors)
         if form.is_valid():
+            print("ormghjfhjf")
             try:
                 form.save()
                 return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../user_login'><button>Goto Home</button></a>")
-            except Exception:
-                return HttpResponse("<p style='color:green; font-size:40px;'>user does not exist")
-
+            except Exception as e:
+                context = {"exception_message": str(e)}
+                return HttpResponse(render(request, 'alert.html', context))
         else:
+            form = forms.Profile()
             return redirect('a3:profile')
     else:            
-        print("failed")
+        form = forms.Profile()
     return render(request,"profile.html")
 
 
@@ -210,7 +225,7 @@ def sub_details(request):
 
 def sub_updates(request):
     username = request.user.username
-    subject= Assign_sub.objects.filter(name = username).first()
+    subject= list(Assign_sub.objects.filter(name = username))
     return render(request,"sub_updates.html", {"subject":subject})
 
 def syl_updates(request):

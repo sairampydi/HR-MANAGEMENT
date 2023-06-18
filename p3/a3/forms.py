@@ -58,13 +58,13 @@ class Assign_sub(forms.ModelForm):
 class Profile(forms.ModelForm):
     class Meta:
         model = models.Profile
-        fields =( "username","email","firstname","lastname","emp_id","dob","mobile","address","city","country","postal_code", )
-        def save(self):
-            name = self.cleaned_data.get('name')
-            email = self.cleaned_data.get('name')
-            User.objects.get(username=name,email = email)
-            user = super().save()
-            
+        fields =( "image","username","surname","email","emp_id","dob","mobile","address","city","state","country","postal_code","education","experience","details", )
+    def save(self):
+        name = self.cleaned_data.get('name')
+        email = self.cleaned_data.get('name')
+        # User.objects.get(username=name)
+        user = super().save()
+        
 
 
 class Syl_updates(forms.ModelForm):
