@@ -1,11 +1,13 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from .models import Leaves , Salary , Profile , Assign_sub , Feedback , Syl_updates
+from .models import Leaves , Salary ,Assign_sub,Profile , Feedback , Syl_updates
 from django.http import HttpResponse
 from django.core.mail import send_mail
-from.import forms
+from .import forms 
+from .forms import Profile as  ProfileForm
 from accounts.models import User
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
 
 def home(request):
@@ -113,23 +115,35 @@ def accept_leaves(request,id):
     send_mail(subject, message, from_email, recipient_list)
     return redirect(reverse("a3:update_employees"))
 
+
+
 def assign_sub(request):
+    users = User.objects.all()
     if request.method == "POST":
         print("auth")
         form = forms.Assign_sub(request.POST)
+        print("sai")
         if form.is_valid():
+            print("sairam")
             try:
-                form.save()
-                return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../hr_home'><button>Goto Home</button></a>")
+                print("success")
+                assignment = form.save()
+                username = form.cleaned_data['name']
+                user = get_object_or_404(User, username=username)
+                assignment.user = user
+                assignment.save()
+                return HttpResponse("<p style='color:green; font-size:40px;'>Successfully added</p> <a href='../hr_home'><button>Goto Home</button></a>")
             except Exception as e:
-                return HttpResponse('<body style="background-color: #f8f8f8;  color: #333;  border: 2px solid #ccc;  padding: 20px;  border-radius: 6px;  text-align: center;  max-width: 400px;  margin: 0 auto; font-size: 40px;  display: block;  margin-bottom: 20px;}">Oops, something went wrong</body>')
+                return HttpResponse(str(e))
+                # return HttpResponse('<body style="background-color: #f8f8f8;  color: #333;  border: 2px solid #ccc;  padding: 20px;  border-radius: 6px;  text-align: center;  max-width: 400px;  margin: 0 auto; font-size: 40px;  display: block;  margin-bottom: 20px;}">Oops, something went wrong</body>')
         else:
-            form = forms.Assign_sub()
-        return render(request,"assign_sub.html",{'form':form})
+            HttpResponse("something is wrong")
     else:
         print("failed")
         form = Assign_sub()
-    return render(request,"assign_sub.html")
+    return render(request, "assign_sub.html", {'form': form, 'users': users})
+
+
 
 def emp_profile(request):
     username = request.user.username
@@ -158,7 +172,6 @@ def profile(request):
         form = forms.Profile( request.POST,request.FILES)
         print(form.errors)
         if form.is_valid():
-            print("ormghjfhjf")
             try:
                 form.save()
                 return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../user_login'><button>Goto Home</button></a>")
@@ -172,14 +185,25 @@ def profile(request):
         form = forms.Profile()
     return render(request,"profile.html")
 
+def update_profile(request):
+    user = request.user
+    profile = user.profile if hasattr(user, 'profile') else None
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = user
+            profile.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'profile.html', {'form': form})
 
 def employees(request):
-    # employee = User.objects.filter(employee_status = "employee")
     employee = Profile.objects.all().order_by("pk")
     return render(request,"employees.html",{"employee":employee})
 
 def syllabus(request):
-    # employee = User.objects.filter(employee_status = "employee")
     syllabus = Syl_updates.objects.all().order_by("pk")
     return render(request,"syllabus.html",{"syllabus":syllabus})
 
@@ -220,32 +244,42 @@ def sal_details(request):
     return render(request,"sal_details.html", {"salary":salary})
 
 def sub_details(request):
-    subjects= Assign_sub.objects.all().order_by("emp_id")
+    subjects= Assign_sub.objects.all().order_by("date")
     return render(request,"sub_details.html", {"subjects":subjects})
 
 def sub_updates(request):
     username = request.user.username
-    subject= list(Assign_sub.objects.filter(name = username))
+    print(username)
+    subject=Assign_sub.objects.all()
     return render(request,"sub_updates.html", {"subject":subject})
 
 def syl_updates(request):
     if request.method == "POST":
         print("auth")
-        form = forms.Syl_updates(request.POST)
-        if form.is_valid():
-            print("saved")
+        # form = forms.Syl_updates(request.POST)
+        username = request.user.username
+        emp = Profile.objects.filter(username=username).first()
+        emp_id=emp.emp_id
+        branch=request.POST["branch"]
+        subject=request.POST["subject"]
+        year=request.POST["year"]
+        section=request.POST["section"]
+        units=request.POST["units"]
+        current=request.POST["current"]
+        if emp is not None:
+            print(emp.emp_id)
             try:
-                form.save()
+                temp=Syl_updates.objects.create(subject=subject,branch=branch,year=year,section=section,units=units,current=current,emp_id=emp_id,username=username)   
                 return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../emp_home'><button>Goto Home</button></a>")
-            except Exception:
-                return HttpResponse(" <p style='color:green; font-size:40px;'>user does not exist")
+            except Exception as e:
+                return HttpResponse(e)
         else:
-            HttpResponse("form is not valid")
-    else:
-        print("failed")
-        form= Syl_updates()
+            return HttpResponse("<p style='color:red; font-size:40px;'>user does not exist</p>")
     print("end")
-    return render(request,"syl_updates.html")
+    return render(request, "syl_updates.html")
+
+
+
 
 # @login_required(login_url = "/login")
 def leaves(request):

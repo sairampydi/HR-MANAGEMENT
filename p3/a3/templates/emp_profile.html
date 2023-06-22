@@ -17,14 +17,15 @@
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profile Settings</h4>
-                </div>
+                    <h4 class="text-right">Profile</h4>
+                </div><hr>
            <div class="row mt-2">
                     <div class="col-md-6"><label class="labels">Name</label><p class="form-control" >{{profile.username}}</p></div>
                     <div class="col-md-6"><label class="labels">Surname</label><p class="form-control" >{{profile.surname}}</p></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Mobile Number</label><p class="form-control" >{{profile.mobile}}</div>
+                    <div class="col-md-12"><label class="labels">Employee ID</label><p class="form-control" >{{profile.emp_id}}</div>
                     <div class="col-md-12"><label class="labels">Address Line 1</label><p class="form-control">{{profile.address}}</div>
                     <div class="col-md-12"><label class="labels">Postcode</label><p class="form-control">{{profile.postal_code}}</div>
                     <div class="col-md-12"><label class="labels">City</label><p class="form-control" >{{profile.city}}</div>
@@ -35,14 +36,15 @@
                     <div class="col-md-6"><label class="labels">Country</label><p class="form-control" >{{profile.country}}</div>
                     <div class="col-md-6"><label class="labels">State/Region</label><p class="form-control" >{{profile.state}}</div>
                 </div>
-                <div class="mt-5 text-center"><a href= "" class="btn btn-primary profile-button" type="button">Edit Profile</a></div>
+                <div class="mt-5 text-center"><a href= "../profile_update" class="btn btn-primary profile-button" type="button">Edit Profile</a></div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>
-                <div class="col-md-12"><label class="labels">Experience in Designing</label><p class="form-control" >{{profile.experience}}</div> <br>
+                <div class="d-flex justify-content-between align-items-center mb-3"><h5>Experience :</h5></div><hr>
+                <div class="col-md-12"><label class="labels">Experience in Teaching</label><p class="form-control" >{{profile.experience}}</div> <br>
                 <div class="col-md-12"><label class="labels">Additional Details</label><p class="form-control" >{{profile.details}}</div>
+                <div class="col-md-12"><label class="labels">Research Publications</label><p class="form-control" >{{profile.research}}</div>
             </div>
         </div>
     </div>

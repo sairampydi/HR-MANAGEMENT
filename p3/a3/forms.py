@@ -39,7 +39,7 @@ class Feedback(forms.ModelForm):
 class Assign_sub(forms.ModelForm):
     class Meta:
         model = models.Assign_sub
-        fields =("name","emp_id","branch","year","section","subject",)
+        fields =("name","emp_id","branch","year","section","subject")
     def save(self):
         name = self.cleaned_data.get('name')
         branch = self.cleaned_data.get("branch") 
@@ -58,26 +58,25 @@ class Assign_sub(forms.ModelForm):
 class Profile(forms.ModelForm):
     class Meta:
         model = models.Profile
-        fields =( "image","username","surname","email","emp_id","dob","mobile","address","city","state","country","postal_code","education","experience","details", )
+        fields =( "image","username","surname","email","emp_id","dob","mobile","address","city","state","country","postal_code","education","experience","details", "research")
     def save(self):
         name = self.cleaned_data.get('name')
         email = self.cleaned_data.get('name')
         # User.objects.get(username=name)
         user = super().save()
+        return user
         
 
 
-class Syl_updates(forms.ModelForm):
-    class Meta:
-        model = models.Syl_updates
-        fields = ("name","emp_id","subject","branch","section","startdate","units","current")
-    def save(self):
-        name = self.cleaned_data.get('name')
-        emp_id = self.cleaned_data.get('emp_id')
-        branch = self.cleaned_data.get('branch')
-        branchs = ['MCA','CSE','MECH','CIVIL','CSD','CSM','IT','EEE','ECE']
-        bb = branch.upper()
-        if bb not in branchs:
-            raise Exception('branch not found')
-        User.objects.get(username=name,emp_id = emp_id)
-        user = super().save()
+# class Syl_updates(forms.ModelForm):
+#     class Meta:
+#         model = models.Syl_updates
+#         fields = ("subject","branch","section","startdate","units","current")
+#     def save(self):
+#         branch = self.cleaned_data.get('branch')
+#         branchs = ['MCA','CSE','MECH','CIVIL','CSD','CSM','IT','EEE','ECE']
+
+#         bb = branch.upper()
+#         if bb not in branchs:
+#             raise Exception('branch not found')
+#         super().save()

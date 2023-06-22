@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from accounts.models import User
 
 class Leaves(models.Model):
     name = models.CharField(max_length=20)
@@ -98,34 +99,34 @@ class Profile(models.Model):
     experience = models.CharField(max_length=30,default="none" ) 
     details = models.CharField(max_length=30, default="none") 
     postal_code = models.IntegerField(default=12345) 
+    research = models.TextField(default="None")
    
 
     def __str__(self):
         return self.username 
     
 class Assign_sub(models.Model):
-    name = models.CharField(max_length=20)
-    emp_id = models.IntegerField(default= 1)
+    name = models.ForeignKey(User,on_delete =models.CASCADE)
     branch = models.CharField(max_length=30)
+    emp_id = models.IntegerField(default=123)
     year = models.IntegerField(default= 1)
     section = models.IntegerField(default=0)
     subject = models.CharField(max_length=30)
     date = models.DateTimeField( default= datetime.now)
-
     def __str__(self):
-        return self.name
-     
+        return str(self.emp_id)
+    
 
 class Syl_updates(models.Model):
-    name = models.CharField(max_length=20)
-    emp_id = models.IntegerField(default= 1)
     subject = models.CharField(max_length=30)
     branch = models.CharField(max_length=30)
     section = models.CharField(max_length=30)
     startdate = models.DateField(blank=True, null=True)
     units = models.CharField(max_length= 30)
     current = models.CharField(max_length= 30)
-
+    emp_id=models.IntegerField(default=123)
+    username=models.CharField(max_length=30,default=None)
+    year=models.IntegerField(default=2)
     def __str__(self):
-        return self.name
+        return self.username
      

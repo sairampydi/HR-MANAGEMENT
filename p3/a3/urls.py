@@ -12,7 +12,7 @@ urlpatterns = [
     path("nav_bar/",views.nav_bar,name="nav_bar"),
     path("emp_nav/",views.emp_nav,name="emp_nav"),
     path("add_salary/",views.add_salary,name="add_salary"),
-    # path("salary_updates/",views.salary_updates,name="salary_updates"),
+    path("salary_updates/",views.salary_updates,name="salary_updates"),
     path("salary_updates/",views.salary_updates,name="salary_updates"),
     path("sal_details/",views.sal_details,name="sal_details"),
     path("sub_details/",views.sub_details,name="sub_details"),
@@ -23,6 +23,7 @@ urlpatterns = [
     path("hod_home/",views.hod_home,name="hod_home"),
     path("hr_nav/",views.hr_nav,name="hr_nav"),
     path("profile/",views.profile,name="profile"),
+    path("profile_update/",views.update_profile,name="profile_update"),
     path("alert/",views.alert,name="alert"),
     path("syllabus/",views.syllabus,name="syllabus"),
     path("emp_profile/",views.emp_profile,name="emp_profile"),
@@ -38,6 +39,4 @@ urlpatterns = [
     path("<int:id>/delete_z/",views.delete_z,name="delete_z"),
     path("<int:id>/accept/",views.accept_view,name="accept"),
     path("<int:id>/accept_l/",views.accept_leaves,name="accept_l"),
-
-    # path("",views.home,name="leaves.html")
 ]

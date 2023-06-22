@@ -9,11 +9,11 @@ body {
     border-color: #BA68C8
 }
 
- .profile-button {
-    background-color :rgb(99, 39, 120) ;
+.profile-button {
+    background-color: rgb(99, 39, 120);
     box-shadow: none;
     border: solid 3px #BA68C8;
-    padding : 2%;
+    padding: 2%;
 
 }
 
@@ -37,7 +37,7 @@ body {
 }
 
 .labels {
-    font-size: 11px
+    font-size: 14px;
 }
 
 .add-experience:hover {
@@ -48,12 +48,12 @@ body {
 }
 </style>
 {% endblock %}
+
 {% block body %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 <form action="{% url 'a3:profile' %}" method="post" class="" enctype="multipart/form-data">
     {% csrf_token %}
     {% if form.errors %}
@@ -75,60 +75,60 @@ body {
                 </div>
                 <hr>
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <input class="border border-primary" type="file" name="image" accept="image/*">
+                    <input class="border border-primary" type="file" name="image" accept="image/*" value="{{ form.image.value }}">
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-6">
                         <label class="labels">Name</label>
-                        <input type="text" class="form-control" placeholder="First name" name="username">
+                        <input type="text" class="form-control" placeholder="First name" name="username" value="{{ form.username.value }}">
                     </div>
                     <div class="col-md-6">
                         <label class="labels">Surname</label>
-                        <input type="text" class="form-control" placeholder="Surname" name="surname">
+                        <input type="text" class="form-control" placeholder="Surname" name="surname" value="{{ form.surname.value }}">
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <label class="labels">Mobile Number</label>
-                        <input type="text" class="form-control" placeholder="Enter phone number" name="mobile" maxlength="10">
+                        <input type="text" class="form-control" placeholder="Enter phone number" name="mobile" maxlength="10" value="{{ form.mobile.value }}">
                     </div>
                     <div class="col-md-12">
                         <label class="labels">Employee Id</label>
-                        <input type="number" class="form-control" placeholder="Employee Id" name="emp_id">
+                        <input type="number" class="form-control" placeholder="Employee Id" name="emp_id" readonly value="{{bar}}">
                     </div>
                     <div class="col-md-12">
                         <label class="labels">Date of Birth</label>
-                        <input type="date" class="form-control" placeholder="Date of birth" name="dob">
+                        <input type="date" class="form-control" placeholder="Date of birth" name="dob" value="{{ form.dob.value }}">
                     </div>
                     <div class="col-md-12">
                         <label class="labels">Address Line 1</label>
-                        <input type="text" class="form-control" placeholder="Enter address line 1" name="address">
+                        <input type="text" class="form-control" placeholder="Enter address line 1" name="address" value="{{ form.address.value }}">
                     </div>
                     <div class="col-md-12">
                         <label class="labels">Postcode</label>
-                        <input type="text" class="form-control" placeholder="Postal Code" name="postal_code">
+                        <input type="text" class="form-control" placeholder="Postal Code" name="postal_code" value="{{ form.postal_code.value }}">
                     </div>
                     <div class="col-md-12">
                         <label class="labels">City</label>
-                        <input type="text" class="form-control" placeholder="Enter City" name="city">
+                        <input type="text" class="form-control" placeholder="Enter City" name="city" value="{{ form.city.value }}">
                     </div>
                     <div class="col-md-12">
                         <label class="labels">Email ID</label>
-                        <input type="text" class="form-control" placeholder="Enter email ID" name="email">
+                        <input type="text" class="form-control" placeholder="Enter email ID" name="email" value="{{ form.email.value }}">
                     </div>
                     <div class="col-md-12">
                         <label class="labels">Education</label>
-                        <input type="text" class="form-control" placeholder="Education" name="education">
+                        <input type="text" class="form-control" placeholder="Education" name="education" value="{{ form.education.value }}">
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <label class="labels">Country</label>
-                        <input type="text" class="form-control" placeholder="Country" name="country">
+                        <input type="text" class="form-control" placeholder="Country" name="country" value="{{ form.country.value }}">
                     </div>
                     <div class="col-md-6">
                         <label class="labels">State/Region</label>
-                        <input type="text" class="form-control" placeholder="State/Region" name="state">
+                        <input type="text" class="form-control" placeholder="State/Region" name="state" value="{{ form.state.value }}">
                     </div>
                 </div>
                 <div class="mt-5 text-center">
@@ -147,16 +147,20 @@ body {
                 <br>
                 <div class="col-md-12">
                     <label class="labels">Experience in Teaching</label>
-                    <input type="text" class="form-control" placeholder="Experience" name="experience">
+                    <input type="text" class="form-control" placeholder="Experience" name="experience" value="{{ form.experience.value }}">
                 </div>
                 <br>
                 <div class="col-md-12">
                     <label class="labels">Additional Details</label>
-                    <input type="text" class="form-control" placeholder="Additional details" name="details">
+                    <input type="text" class="form-control" placeholder="Additional details" name="details" value="{{ form.details.value }}">
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <label class="labels">Research Publications</label>
+                    <textarea class="form-control" name="research" rows="4" cols="50"></textarea>
                 </div>
             </div>
         </div>
     </div>
 </form>
-
 {% endblock %}
