@@ -4,8 +4,6 @@ from datetime import datetime
 import uuid
 
 
-# Create your models here.
-# class user_signup(models.Models):
 class User(AbstractUser):
     employee_options = (
         ('hr', 'HR'),
@@ -18,8 +16,8 @@ class User(AbstractUser):
     )
     email = models.EmailField()
     position = models.CharField(max_length=30,default="none",choices= position_options)
-    employee_id = models.CharField( max_length=5, default=2110, primary_key =True),
     date_created = models.DateField(default=datetime.now)
+    joining_letter = models.ImageField(upload_to="account/images",default="None")
     stream = models.CharField(max_length=20,default = "none")
 
 

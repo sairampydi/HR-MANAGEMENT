@@ -4,29 +4,47 @@
 
 {% block body %} 
    {% tailwind_css %}
-  <div class="relative overflow-x-auto ml-5">
+<div class="relative overflow-x-auto ml-5">
     <h1 class="border text-4xl text-yellow-800 px-6 pt-10 pb-8 bg-white w-1/2 max-w-md mx-auto rounded-t-md sm:px-10">Recent Employees</h1>
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border border-gray-300">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th class="px-6 py-3">Username</th>
-                <th class="px-6 py-3">Email</th>
-                <th class="px-6 py-3">Branch</th>
-                <th class="px-6 py-3">Date</th>
+                <th class="px-6 py-3 border-b border-black">Username</th>
+                <th class="px-6 py-3 border-b border-black ">Email</th>
+                <th class="px-6 py-3 border-b border-black">Branch</th>
+                <th class="px-6 py-3 border-b border-black">Date</th>
+                <th class="px-6 py-3 border-b border-black">Joining Letter</th>
+                <th class="px-6 py-3 border-b border-black">Accept</th>
+                <th class="px-6 py-3 border-b border-black">Reject</th>
             </tr>
         </thead>
         {% for i in update_employee %}
         <tbody class="">
         <tr>
-            <td class="px-6 py-3" >{{ i.username }}</td>
-            <td class="px-6 py-3" >{{ i.email }}</td>
-            <td class="px-6 py-3" >{{ i.stream }}</td>
-            <td class="px-6 py-3" >{{ i.date_created }}</td>
-            <td><a href="../{{i.id}}/accept"><button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-6 py-2 rounded">Accept</button></a></td>
-            <td><a href="../{{i.id}}/delete"><button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-6 py-2 rounded">Reject</button></a></td>
+            <td class="px-6 py-3 border-b border-black">{{ i.username }}</td>
+            <td class="px-6 py-3 border-b border-black">{{ i.email }}</td>
+            <td class="px-6 py-3 border-b border-black">{{ i.stream }}</td>
+            <td class="px-6 py-3 border-b border-black">{{ i.date_created }}</td>
+            <td class="px-6 py-3 border-b border-black">
+                <a href="{{ i.joining_letter.url }}" target="_blank" download>
+                    <img class="w-36" src="{{ i.joining_letter.url }}" alt="Joining Letter">
+                    Download
+                </a>
+            </td>
+            <td class="px-6 py-3 border-b border-black">
+                <a href="../{{i.id}}/accept">
+                    <button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-6 py-2 rounded">Accept</button>
+                </a>
+            </td>
+            <td class="px-6 py-3 border-b border-black">
+                <a href="../{{i.id}}/delete">
+                    <button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-6 py-2 rounded">Reject</button>
+                </a>
+            </td>
         </tr>
         </tbody>
         {% endfor %}
     </table>
 </div>
+
 {% endblock %}

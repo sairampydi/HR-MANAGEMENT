@@ -14,13 +14,14 @@
     <form action="" method="post">
         {% csrf_token %}
         <label for="name">Employee Name</label>
-        <input class="border w-full h-10 px-3 mb-5 rounded-md" list="section-list" name="name" placeholder="employee username" required>
+    <input class="border w-full h-10 px-3 mb-5 rounded-md" id="section-list" list="datalist-section-list" name="name" placeholder="employee username" required>
+    <datalist id="datalist-section-list">
+    {% for user in users %}
+        <option value="{{ user.username }}">
+    {% endfor %}
+    </datalist>
 
-        <datalist id="section-list">
-            {% for user in users %}
-                <option value="{{ user.username }}">
-            {% endfor %}
-            </datalist>
+
         <label for="name">Branch</label>
         <input class="border w-full h-10 px-3 mb-5 rounded-md" type="text" name="branch" required placeholder="Branch">
 

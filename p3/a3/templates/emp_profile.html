@@ -1,3 +1,4 @@
+{% load static tailwind_tags %}
 {% if position == "hod" %}
     {% include "hod_nav.html" %}
 {% else %}
@@ -12,7 +13,11 @@
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src= "{{ profile.image.url }}"><span class="font-weight-bold">{{profile.username}}</span><span class="text-black-50">{{profile.email}}</span><span> </span></div>
+        {% if user.userprofile.profile_image %}
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src= "{{ profile.image.url }}" alt="profile image"><span class="font-weight-bold">{{profile.username}}</span><span class="text-black-50">{{profile.email}}</span><span> </span></div>
+        {% else %}
+            <img src="{% static 'profile(d).png' %}" alt="Default Profile Image">
+        {% endif %}
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">

@@ -36,23 +36,23 @@ class Feedback(forms.ModelForm):
         super().save()
          
 
-class Assign_sub(forms.ModelForm):
-    class Meta:
-        model = models.Assign_sub
-        fields =("name","emp_id","branch","year","section","subject")
-    def save(self):
-        name = self.cleaned_data.get('name')
-        branch = self.cleaned_data.get("branch") 
-        year = self.cleaned_data.get("year") 
-        branchs = ["MCA", "EEE", "ECE", "CIVIL", "MECH" ,"CSE","CSD" ,"CSM", "IT" ]
-        bb= branch.upper()
-        if bb not in branchs:
-            messages.success("please select correct branch")
+# class Assign_sub(forms.ModelForm):
+#     class Meta:
+#         model = models.Assign_sub
+#         fields =("name","branch","year","section","subject")
+#     def save(self):
+#         name = self.cleaned_data.get('name')
+#         branch = self.cleaned_data.get("branch") 
+#         year = self.cleaned_data.get("year") 
+#         branchs = ["MCA", "EEE", "ECE", "CIVIL", "MECH" ,"CSE","CSD" ,"CSM", "IT" ]
+#         bb= branch.upper()
+#         if bb not in branchs:
+#             messages.success("please select correct branch")
  
-        if year > 4 :
-            messages.success("please enter ")  
-        User.objects.get(username=name)
-        user = super().save()
+#         if year > 4 :
+#             messages.success("please enter ")  
+#         User.objects.get(username=name)
+#         user = super().save()
 
 
 class Profile(forms.ModelForm):

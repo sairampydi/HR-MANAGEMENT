@@ -16,8 +16,7 @@ from django.urls import reverse
 s = set()
 def signup_views(request):
     if request.method == 'POST':
-        form = Userform(request.POST)
-        print(form.errors)
+        form = Userform(request.POST,request.FILES)
         if form.is_valid():
             print("signed up")
             while True:
@@ -35,6 +34,8 @@ def signup_views(request):
                 'bar':b,
             }
             return render(request,"profile.html",context)
+        else:
+            print(form.errors)
         
     form = Userform
     return render(request,"signup.html",{'form':form})
@@ -61,7 +62,7 @@ def hr_login(request):
         else:
             print("failure")
             messages.success(request,"Incorrect Username or Password")
-            return HttpResponse("your username or password is worng try again")
+            return redirect("accounts:hr_login")
     else:
         form = AuthenticationForm()
     return render(request,'hr_login.html',{'form':form})

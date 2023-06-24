@@ -84,7 +84,7 @@ class Salary(models.Model):
         return self.username
 
 class Profile(models.Model): 
-    image = models.ImageField(upload_to="account/images", default="",)
+    image = models.ImageField(upload_to="account/images", default="profile(d).png",)
     username= models.CharField(max_length=20)
     surname= models.CharField(max_length=20)
     email = models.EmailField()
@@ -94,7 +94,7 @@ class Profile(models.Model):
     address = models.CharField(max_length=50)
     city= models.CharField(max_length=30)
     country = models.CharField(max_length=30) 
-    state= models.CharField(max_length=30 , default="btech") 
+    state= models.CharField(max_length=30 , default="None") 
     education = models.CharField(max_length=30,default="btech") 
     experience = models.CharField(max_length=30,default="none" ) 
     details = models.CharField(max_length=30, default="none") 
@@ -108,13 +108,12 @@ class Profile(models.Model):
 class Assign_sub(models.Model):
     name = models.ForeignKey(User,on_delete =models.CASCADE)
     branch = models.CharField(max_length=30)
-    emp_id = models.IntegerField(default=123)
     year = models.IntegerField(default= 1)
     section = models.IntegerField(default=0)
     subject = models.CharField(max_length=30)
     date = models.DateTimeField( default= datetime.now)
     def __str__(self):
-        return str(self.emp_id)
+        return str(self.name)
     
 
 class Syl_updates(models.Model):

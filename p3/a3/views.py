@@ -6,6 +6,7 @@ from .import forms
 from .forms import Profile as  ProfileForm
 from accounts.models import User
 from django.urls import reverse
+from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 
@@ -121,25 +122,48 @@ def assign_sub(request):
     users = User.objects.all()
     if request.method == "POST":
         print("auth")
-        form = forms.Assign_sub(request.POST)
-        print("sai")
-        if form.is_valid():
-            print("sairam")
-            try:
-                print("success")
-                assignment = form.save()
-                username = form.cleaned_data['name']
-                user = get_object_or_404(User, username=username)
-                assignment.user = user
-                assignment.save()
-                return HttpResponse("<p style='color:green; font-size:40px;'>Successfully added</p> <a href='../hr_home'><button>Goto Home</button></a>")
-            except Exception as e:
-                return HttpResponse(str(e))
-                # return HttpResponse('<body style="background-color: #f8f8f8;  color: #333;  border: 2px solid #ccc;  padding: 20px;  border-radius: 6px;  text-align: center;  max-width: 400px;  margin: 0 auto; font-size: 40px;  display: block;  margin-bottom: 20px;}">Oops, something went wrong</body>')
-        else:
-            HttpResponse("something is wrong")
+        name = request.POST.get('name')
+        branch = request.POST.get('branch')
+        year = request.POST.get('year')
+        section = request.POST.get('section')
+        subject = request.POST.get('subject')
+
+        # Perform form validation
+        branchs = ["MCA", "EEE", "ECE", "CIVIL", "MECH", "CSE", "CSD", "CSM", "IT"]
+        bb = branch.upper()
+        if bb not in branchs:
+            error_message = "Please select a correct branch."
+            return HttpResponse(error_message)
+
+        try:
+            year = int(year)
+        except ValueError:
+            error_message = "Please enter a valid year."
+            return HttpResponse(error_message)
+
+        if year > 4:
+            error_message = "Please enter a valid year."
+            return HttpResponse(error_message)
+
+        try:
+            user = User.objects.get(username=name)
+        except User.DoesNotExist:
+            error_message = "User does not exist."
+            return HttpResponse(error_message)
+
+        try:
+            temp = Assign_sub.objects.create(
+                name=user,
+                branch=branch,
+                year=year,
+                section=section,
+                subject=subject,
+                date=datetime.now()
+            )
+            return HttpResponse("<p style='color:green; font-size:40px;'>Successfully added</p> <a href='../hr_home'><button>Goto Home</button></a>")
+        except Exception as e:
+            return HttpResponse(str(e))
     else:
-        print("failed")
         form = Assign_sub()
     return render(request, "assign_sub.html", {'form': form, 'users': users})
 
@@ -169,7 +193,7 @@ def emp_nav(request):
 def profile(request):
     if request.method == "POST":
         print("auth")
-        form = forms.Profile( request.POST,request.FILES)
+        form = forms.Profile( request.POST,request.FILES, instance=request.user.userprofile)
         print(form.errors)
         if form.is_valid():
             try:
@@ -272,7 +296,7 @@ def syl_updates(request):
                 temp=Syl_updates.objects.create(subject=subject,branch=branch,year=year,section=section,units=units,current=current,emp_id=emp_id,username=username)   
                 return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../emp_home'><button>Goto Home</button></a>")
             except Exception as e:
-                return HttpResponse(e)
+                return HttpResponse(str(e))
         else:
             return HttpResponse("<p style='color:red; font-size:40px;'>user does not exist</p>")
     print("end")
