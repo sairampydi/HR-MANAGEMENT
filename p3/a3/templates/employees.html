@@ -16,18 +16,18 @@
                     <th class="px-6 py-3">Email Id</th>
                     <th class="px-6 py-3">Date Of Birth</th>
                     <th class="px-6 py-3">Mobile Number</th>
-                    <th class="px-6 py-3">Country</th>
+                    <th class="px-6 py-3">Area of Specialization</th>
                 </tr>
             </thead>
         {% for i in employee %}
         <tbody class="">
         <tr>
             <td class="px-6 py-3" >{{ i.emp_id }}</td>
-            <td class="px-6 py-3" >{{ i.username }}</td>
+            <a href="/"><td class="px-6 py-3" >{{ i.username }}</td></a>
             <td class="px-6 py-3" >{{ i.email }}</td>
             <td class="px-6 py-3" >{{ i.dob }}</td>
             <td class="px-6 py-3" >{{ i.mobile }}</td>
-            <td class="px-6 py-3" >{{ i.country }}</td>
+            <td class="px-6 py-3" >{{ i.address }}</td>
             <td><a href="../{{i.id}}/delete_v"><button class="ml-20 bg-green-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-6 py-2 rounded">Delete</button></a></td>
 
         </tr>

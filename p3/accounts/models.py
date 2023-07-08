@@ -18,7 +18,7 @@ class User(AbstractUser):
     position = models.CharField(max_length=30,default="none",choices= position_options)
     date_created = models.DateField(default=datetime.now)
     joining_letter = models.ImageField(upload_to="account/images",default="None")
-    stream = models.CharField(max_length=20,default = "none")
+    department = models.CharField(max_length=20,default = "none")
 
 
 

@@ -4,6 +4,12 @@
 {% block body%}
      <script src="https://cdn.tailwindcss.com"></script>
 {% tailwind_css %}
+  <div class="text-center font-serif absolute top-72">
+  <h1 class="text-4xl ">WELCOME TO GAYATRI VIDYA PARISHAD COLLEGE OF ENGINEERING(A)</h1>
+  <h1 class="text-5xl">{{ position.department }}</h1>
+</div>
+<img src="{% static 'gvpce1.jpg' %}" class="w-full">
+
     <img src ="{% static 'gvpce2.jpg' %}" class="w-full">
 
 {% include "footer.html"%}

@@ -3,9 +3,10 @@ from datetime import datetime
 from accounts.models import User
 
 class Leaves(models.Model):
-    name = models.CharField(max_length=20)
+    name=models.CharField(max_length=30,default=None)
     email = models.EmailField(blank=True , null=True)
     # enter_id =  models.AutoField()
+    stream = models.CharField(max_length=20,null=True,default=None)
     startdate = models.DateField(blank=True, null=True)
     lastdate = models.DateField(blank=True, null=True)
     reason_options = (
@@ -16,7 +17,7 @@ class Leaves(models.Model):
         ('others', 'Others'),
     )
     reason = models.CharField(max_length=100, choices=reason_options, default= "vacation")
-    enterreason = models.CharField(max_length=100 ,null = True)
+    enterreason = models.CharField(max_length=100 ,null = True ,blank=True, default=None)
 
     def __str__(self):
         return self.name
@@ -85,21 +86,22 @@ class Salary(models.Model):
 
 class Profile(models.Model): 
     image = models.ImageField(upload_to="account/images", default="profile(d).png",)
-    username= models.CharField(max_length=20)
+    username= models.CharField(max_length=20,default="NONE")
     surname= models.CharField(max_length=20)
     email = models.EmailField()
     emp_id = models.IntegerField(default=123)
     dob = models.DateField(blank=True, null=True)
+    department = models.CharField(max_length=20,default="none")
     mobile = models.IntegerField(blank=True, null=True)
-    address = models.CharField(max_length=50)
+    address = models.CharField(max_length=100)
     city= models.CharField(max_length=30)
     country = models.CharField(max_length=30) 
     state= models.CharField(max_length=30 , default="None") 
     education = models.CharField(max_length=30,default="btech") 
     experience = models.CharField(max_length=30,default="none" ) 
-    details = models.CharField(max_length=30, default="none") 
+    details = models.CharField(max_length=100,blank=True, default="none") 
     postal_code = models.IntegerField(default=12345) 
-    research = models.TextField(default="None")
+    research = models.TextField(default="None",blank=True,)
    
 
     def __str__(self):

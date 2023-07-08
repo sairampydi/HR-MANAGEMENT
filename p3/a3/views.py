@@ -18,10 +18,14 @@ def hr_home(request):
     return render(request,"hr_home.html")
 
 def hod_home(request):
-    return render(request,"hod_home.html")
+    username = request.user.username
+    position = User.objects.filter(username = username).first() 
+    return render(request,"hod_home.html",{"position":position})
 
 def emp_home(request):
-        return render(request,"emp_home.html")
+    username = request.user.username
+    position = User.objects.filter(username = username).first()  
+    return render(request,"emp_home.html",{"position":position})
 
 def hr_nav(request):
     return render(request,"hr_nav.html")
@@ -64,7 +68,7 @@ def feedbackform(request):
 
 def delete_view(request,id):
     user = User.objects.get(pk=id)
-    email = User.objects.get("email")
+    email = user.email
     user.delete()
     subject = 'FROM HR MANAGEMENT'
     message = 'YOUR REQUEST IS REJECTED PLEASE CONTACT ADMINISTRATION'
@@ -160,7 +164,7 @@ def assign_sub(request):
                 subject=subject,
                 date=datetime.now()
             )
-            return HttpResponse("<p style='color:green; font-size:40px;'>Successfully added</p> <a href='../hr_home'><button>Goto Home</button></a>")
+            return HttpResponse("<p style='color:green; font-size:40px;'>Successfully added</p> <a href='../hod_home'><button>Goto Home</button></a>")
         except Exception as e:
             return HttpResponse(str(e))
     else:
@@ -179,6 +183,16 @@ def emp_profile(request):
     }
     return render(request,"emp_profile.html",context)
 
+def profile_view(request, username):
+    profile = Profile.objects.get(username=username)
+    context = {
+        'profile': profile
+    }
+    
+    return render(request, 'profile_view.html', context)
+
+
+
 def hod_profile(request):
     username = request.user.username
     profile = Profile.objects.filter(username = username).first()
@@ -191,23 +205,54 @@ def emp_nav(request):
     return render(request,"emp_nav.html")
 
 def profile(request):
-    if request.method == "POST":
-        print("auth")
-        form = forms.Profile( request.POST,request.FILES, instance=request.user.userprofile)
-        print(form.errors)
-        if form.is_valid():
-            try:
-                form.save()
-                return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../user_login'><button>Goto Home</button></a>")
-            except Exception as e:
-                context = {"exception_message": str(e)}
-                return HttpResponse(render(request, 'alert.html', context))
-        else:
-            form = forms.Profile()
-            return redirect('a3:profile')
-    else:            
-        form = forms.Profile()
-    return render(request,"profile.html")
+    if request.method == 'POST':
+        # Retrieve data from the request
+        username = request.user.username
+        image = request.FILES.get('image')  
+        surname = request.POST.get('surname')
+        email = request.POST.get('email')
+        emp_id = request.POST.get('emp_id')
+        dob = request.POST.get('dob')
+        mobile = request.POST.get('mobile')
+        department = request.POST.get('department')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        country = request.POST.get('country')
+        state = request.POST.get('state', 'None')
+        education = request.POST.get('education', 'btech')
+        experience = request.POST.get('experience', 'none')
+        details = request.POST.get('details', 'none')
+        postal_code = request.POST.get('postal_code', '12345')
+        research = request.POST.get('research', 'None')
+
+        profile = Profile(
+            username = username,
+            image=image,
+            surname=surname,
+            email=email,
+            emp_id=emp_id,
+            dob=dob,
+            mobile=mobile,
+            department = department,
+            address=address,
+            city=city,
+            country=country,
+            state=state,
+            education=education,
+            experience=experience,
+            details=details,
+            postal_code=postal_code,
+            research=research
+        )
+
+        # Save the Profile object
+        profile.save()
+
+        # Redirect to a success page or any other desired view
+        return redirect('success_page')  # Replace 'success_page' with your desired URL
+
+    # Render the initial form
+    return render(request, 'create_profile.html')
 
 def update_profile(request):
     user = request.user
@@ -227,8 +272,16 @@ def employees(request):
     employee = Profile.objects.all().order_by("pk")
     return render(request,"employees.html",{"employee":employee})
 
+def employees2(request):
+    user = request.user
+    department = user.department
+    employee = Profile.objects.filter(department = department)
+    return render(request,"employees2.html",{"employee":employee})
+
 def syllabus(request):
-    syllabus = Syl_updates.objects.all().order_by("pk")
+    user = request.user
+    stream = user.stream
+    syllabus = Syl_updates.objects.filter(branch = stream)
     return render(request,"syllabus.html",{"syllabus":syllabus})
 
 def update_employees(request):
@@ -268,13 +321,15 @@ def sal_details(request):
     return render(request,"sal_details.html", {"salary":salary})
 
 def sub_details(request):
-    subjects= Assign_sub.objects.all().order_by("date")
+    user=request.user
+    stream = user.department
+    subjects= Assign_sub.objects.filter(branch = stream)
     return render(request,"sub_details.html", {"subjects":subjects})
 
 def sub_updates(request):
-    username = request.user.username
+    username = request.user
     print(username)
-    subject=Assign_sub.objects.all()
+    subject=Assign_sub.objects.filter(name= username)
     return render(request,"sub_updates.html", {"subject":subject})
 
 def syl_updates(request):
@@ -308,17 +363,25 @@ def syl_updates(request):
 # @login_required(login_url = "/login")
 def leaves(request):
     if request.method == 'POST':
-        form =forms.Leaves(request.POST)
-        if form.is_valid():
-            try:
-                form.save()
-                return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../emp_home'><button>Goto Home</button></a>")
-            except Exception:
-                return HttpResponse('<p style="color:green; font-size:40px;">user does not exist</p>')
-    else:
-        form = Leaves()
-    return render(request, 'leaves.html', {'form': form})
+        name = request.user.username
+        email = request.user.email
+        stream = request.user.stream
+        startdate = request.POST.get('startdate')
+        lastdate = request.POST.get('lastdate')
+        reason = request.POST.get('reason')
+        enterreason = request.POST.get('enterreason')
+        try:
+            leave = Leaves(name=name, email=email,stream=stream ,startdate=startdate, lastdate=lastdate, reason=reason, enterreason=enterreason)
+            leave.save()
+            return HttpResponse("<p style='color:green; font-size:40px;'> successfully added </p> <a href='../emp_home'><button>Goto Home</button></a>")
+        except Exception as e:
+                return HttpResponse(str(e))           
+    return render(request, 'leaves.html')
+
 
 def leaves_report(request):
-    leaves= Leaves.objects.all().order_by("startdate")
+    user= request.user
+    stream = user.stream
+    print(stream)
+    leaves= Leaves.objects.filter(stream=stream)
     return render(request,"leaves_report.html", {"leaves":leaves},)

@@ -5,18 +5,18 @@ from a3.models import Profile
 from django.contrib import messages
 
 
-class Leaves(forms.ModelForm):
-    class Meta:
-        model = models.Leaves
-        fields =( "name","email","startdate","lastdate","enterreason", "reason", )
+# class Leaves(forms.ModelForm):
+#     class Meta:
+#         model = models.Leaves
+#         fields =( "name","email","startdate","lastdate","enterreason", "reason", )
     
-    def save(self):
-        name = self.cleaned_data.get('name')
-        emp_id = self.cleaned_data.get('emp_id')
-        startdate = self.cleaned_data.get('startdate')
-        lastdate = self.cleaned_data.get('lastdate')
-        User.objects.get(username=name,emp_id=emp_id)
-        user = super().save()
+#     def save(self):
+#         name = self.cleaned_data.get('name')
+#         emp_id = self.cleaned_data.get('emp_id')
+#         startdate = self.cleaned_data.get('startdate')
+#         lastdate = self.cleaned_data.get('lastdate')
+#         User.objects.get(username=name,emp_id=emp_id)
+#         user = super().save()
 
 
 
@@ -55,16 +55,16 @@ class Feedback(forms.ModelForm):
 #         user = super().save()
 
 
-class Profile(forms.ModelForm):
-    class Meta:
-        model = models.Profile
-        fields =( "image","username","surname","email","emp_id","dob","mobile","address","city","state","country","postal_code","education","experience","details", "research")
-    def save(self):
-        name = self.cleaned_data.get('name')
-        email = self.cleaned_data.get('name')
-        # User.objects.get(username=name)
-        user = super().save()
-        return user
+# class Profile(forms.ModelForm):
+#     class Meta:
+#         model = models.Profile
+#         fields =( "image","username","surname","email","emp_id","dob","mobile","address","city","state","country","postal_code","education","experience","details", "research")
+#     def save(self):
+#         name = self.cleaned_data.get('name')
+#         email = self.cleaned_data.get('name')
+#         # User.objects.get(username=name)
+#         user = super().save()
+#         return user
         
 
 

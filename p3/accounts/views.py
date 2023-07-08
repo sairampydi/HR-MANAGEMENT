@@ -81,13 +81,13 @@ def user_login(request):
             messages.success(request,"Incorrect Username or Password")
             return redirect("accounts:user_login")
         if not u.is_active:
-            return HttpResponse("your user is not yet accepted please contact administration")
+            return HttpResponse("style='border: 4px solid black; background: salmon'<i>&#9888;</i>your user is not yet accepted please contact administration")
         user=authenticate(username=username,password=password)
         if user is not None:
             login(request,user)
             return redirect("a3:emp_home")
         else:
-            return HttpResponse("your username or password is worng try again")
+            return HttpResponse("<p style='border: 1px solid darkred; background: salmon'><i>&#9888;</i>your username or password is worng try again</p>")
     else:
         form = AuthenticationForm()
     return render(request,'user_login.html',{'form':form})
@@ -105,7 +105,7 @@ def hod_login(request):
             messages.success(request,"Incorrect Username or Password")
             return redirect("accounts:hod_login")
         if not u.is_active:
-            return HttpResponse("your user is not yet accepted please contact administration")
+            return HttpResponse("<p style='font-size:50px;margin:20%; border: 4px solid black; background: salmon'><i>&#9888;</i>HR is not yet accepted please contact administration</p>")
         user=authenticate(username=username,password=password)
         if user is not None:
             login(request,user)

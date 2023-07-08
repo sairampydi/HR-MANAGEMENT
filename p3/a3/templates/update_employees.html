@@ -13,9 +13,10 @@
                 <th class="px-6 py-3 border-b border-black ">Email</th>
                 <th class="px-6 py-3 border-b border-black">Branch</th>
                 <th class="px-6 py-3 border-b border-black">Date</th>
+                <th class="px-6 py-3 border-b border-black">position</th>
                 <th class="px-6 py-3 border-b border-black">Joining Letter</th>
-                <th class="px-6 py-3 border-b border-black">Accept</th>
-                <th class="px-6 py-3 border-b border-black">Reject</th>
+                <th class="px-28 py-3 border-b border-black">Accept</th>
+                <th class="px-28 py-3 border-b border-black">Reject</th>
             </tr>
         </thead>
         {% for i in update_employee %}
@@ -25,6 +26,7 @@
             <td class="px-6 py-3 border-b border-black">{{ i.email }}</td>
             <td class="px-6 py-3 border-b border-black">{{ i.stream }}</td>
             <td class="px-6 py-3 border-b border-black">{{ i.date_created }}</td>
+            <td class="px-6 py-3 border-b border-black">{{ i.position }}</td>
             <td class="px-6 py-3 border-b border-black">
                 <a href="{{ i.joining_letter.url }}" target="_blank" download>
                     <img class="w-36" src="{{ i.joining_letter.url }}" alt="Joining Letter">
